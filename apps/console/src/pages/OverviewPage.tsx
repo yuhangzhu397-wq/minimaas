@@ -49,6 +49,10 @@ type BillingRow = {
   model: string;
   output: string;
   outputCost: string;
+  cacheCreation1h: string;
+  cacheCreation1hCost: string;
+  cacheCreation5m: string;
+  cacheCreation5mCost: string;
   cache: string;
   cacheCost: string;
   input: string;
@@ -83,6 +87,10 @@ const billingRows: BillingRow[] = [
     model: "Gemini-2.5-pro",
     output: "0.615 K",
     outputCost: "￥ 0.042700",
+    cacheCreation1h: "—",
+    cacheCreation1hCost: "",
+    cacheCreation5m: "—",
+    cacheCreation5mCost: "",
     cache: "—",
     cacheCost: "",
     input: "0.002 K",
@@ -96,6 +104,10 @@ const billingRows: BillingRow[] = [
     model: "claude-haiku-4.5",
     output: "1.414 K",
     outputCost: "￥ 0.049490",
+    cacheCreation1h: "—",
+    cacheCreation1hCost: "",
+    cacheCreation5m: "—",
+    cacheCreation5mCost: "",
     cache: "28.223 K",
     cacheCost: "￥ 0.019756",
     input: "13.225 K",
@@ -109,10 +121,14 @@ const billingRows: BillingRow[] = [
     model: "claude-opus-4-6",
     output: "42.706 K",
     outputCost: "￥ 7.473550",
-    cache: "1,923.578 K",
-    cacheCost: "￥ 84.156545",
-    input: "3,412.445 K",
-    inputCost: "￥ 11.943569",
+    cacheCreation1h: "—",
+    cacheCreation1hCost: "",
+    cacheCreation5m: "1,923.578 K",
+    cacheCreation5mCost: "￥ 84.156545",
+    cache: "3,412.445 K",
+    cacheCost: "￥ 11.943569",
+    input: "2,046.915 K",
+    inputCost: "￥ 71.642025",
     token: "7,425.644",
     amount: "￥ 175.215689",
   },
@@ -122,6 +138,10 @@ const billingRows: BillingRow[] = [
     model: "claude-opus-4-7",
     output: "2.453 K",
     outputCost: "￥ 0.429275",
+    cacheCreation1h: "—",
+    cacheCreation1hCost: "",
+    cacheCreation5m: "—",
+    cacheCreation5mCost: "",
     cache: "—",
     cacheCost: "",
     input: "5.589 K",
@@ -135,10 +155,14 @@ const billingRows: BillingRow[] = [
     model: "claude-sonnet-4-6",
     output: "74.631 K",
     outputCost: "￥ 7.836255",
-    cache: "65.87 K",
-    cacheCost: "￥ 2.766540",
-    input: "1,283.299 K",
-    inputCost: "￥ 33.686602",
+    cacheCreation1h: "65.870 K",
+    cacheCreation1hCost: "￥ 2.766540",
+    cacheCreation5m: "1,283.299 K",
+    cacheCreation5mCost: "￥ 33.686602",
+    cache: "711.896 K",
+    cacheCost: "￥ 0.249164",
+    input: "270.095 K",
+    inputCost: "￥ 2.037835",
     token: "2,405.791",
     amount: "￥ 46.576396",
   },
@@ -148,6 +172,10 @@ const billingRows: BillingRow[] = [
     model: "gemini-2.5-flash-lite",
     output: "0.096 K",
     outputCost: "￥ 0.000268",
+    cacheCreation1h: "—",
+    cacheCreation1hCost: "",
+    cacheCreation5m: "—",
+    cacheCreation5mCost: "",
     cache: "—",
     cacheCost: "",
     input: "0.937 K",
@@ -161,6 +189,10 @@ const billingRows: BillingRow[] = [
     model: "gemini-3-flash-preview",
     output: "262.094 K",
     outputCost: "￥ 5.503974",
+    cacheCreation1h: "—",
+    cacheCreation1hCost: "",
+    cacheCreation5m: "—",
+    cacheCreation5mCost: "",
     cache: "—",
     cacheCost: "",
     input: "1,096.251 K",
@@ -174,6 +206,10 @@ const billingRows: BillingRow[] = [
     model: "gemini-3.1-flash-lite-preview",
     output: "0.01 K",
     outputCost: "￥ 0.000110",
+    cacheCreation1h: "—",
+    cacheCreation1hCost: "",
+    cacheCreation5m: "—",
+    cacheCreation5mCost: "",
     cache: "—",
     cacheCost: "",
     input: "0.09 K",
@@ -187,6 +223,10 @@ const billingRows: BillingRow[] = [
     model: "gemini-3.1-pro-preview",
     output: "17.849 K",
     outputCost: "￥ 1.501920",
+    cacheCreation1h: "—",
+    cacheCreation1hCost: "",
+    cacheCreation5m: "—",
+    cacheCreation5mCost: "",
     cache: "—",
     cacheCost: "",
     input: "147.174 K",
@@ -200,6 +240,10 @@ const billingRows: BillingRow[] = [
     model: "gpt-5.4",
     output: "236.613 K",
     outputCost: "￥ 24.940650",
+    cacheCreation1h: "—",
+    cacheCreation1hCost: "",
+    cacheCreation5m: "—",
+    cacheCreation5mCost: "",
     cache: "16,167.936 K",
     cacheCost: "￥ 28.292029",
     input: "14,250.037 K",
@@ -213,6 +257,10 @@ const billingRows: BillingRow[] = [
     model: "claude-opus-4-8",
     output: "0.014 K",
     outputCost: "￥ 0.002450",
+    cacheCreation1h: "—",
+    cacheCreation1hCost: "",
+    cacheCreation5m: "—",
+    cacheCreation5mCost: "",
     cache: "—",
     cacheCost: "",
     input: "0.008 K",
@@ -410,6 +458,21 @@ function SelectField({
 }
 
 function TokenDetail({ row }: { row: BillingRow }) {
+  const cacheDetails = [
+    {
+      label: "明细创建 1h 缓存",
+      tooltip: "明细创建 1h 缓存详情",
+      value: row.cacheCreation1h,
+      cost: row.cacheCreation1hCost,
+    },
+    {
+      label: "明细创建 5m 缓存",
+      tooltip: "明细创建 5m 缓存详情",
+      value: row.cacheCreation5m,
+      cost: row.cacheCreation5mCost,
+    },
+  ];
+
   return (
     <div className="token-detail">
       <div>
@@ -417,6 +480,22 @@ function TokenDetail({ row }: { row: BillingRow }) {
         <strong>{row.output}</strong>
         <em>{row.outputCost}</em>
       </div>
+      {cacheDetails.map((detail) =>
+        detail.value !== "—" ? (
+          <div key={detail.label}>
+            <span
+              className="token-detail-label"
+              data-tooltip={detail.tooltip}
+              tabIndex={0}
+              aria-label={detail.tooltip}
+            >
+              {detail.label}
+            </span>
+            <strong>{detail.value}</strong>
+            <em>{detail.cost}</em>
+          </div>
+        ) : null,
+      )}
       {row.cache !== "—" ? (
         <div>
           <span>缓存命中</span>

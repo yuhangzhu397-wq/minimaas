@@ -10,7 +10,9 @@ import { ModelCenter } from "./pages/ModelCenter";
 import { ModulePage } from "./pages/ModulePage";
 import { OverviewPage } from "./pages/OverviewPage";
 import { TenantAccess } from "./pages/TenantAccess";
+import { TrafficPolicyPage } from "./pages/TrafficPolicyPage";
 import { UpstreamResources } from "./pages/UpstreamResources";
+import { JingmeCardsPage } from "./pages/JingmeCardsPage";
 import { useOverview } from "./hooks/useOverview";
 
 const pages = navigationGroups.flatMap((group) =>
@@ -27,6 +29,7 @@ const slugs: Record<PageName, string> = {
   调用日志: "logs",
   用量账单: "billing",
   评测中心: "evaluations",
+  "京 ME 触达": "jingme-cards",
   系统设置: "settings",
 };
 
@@ -113,6 +116,10 @@ export function App() {
           <UpstreamResources module={activeWaterLevelModule} />
         ) : activePage === "租户与密钥" ? (
           <TenantAccess />
+        ) : activePage === "路由策略" ? (
+          <TrafficPolicyPage />
+        ) : activePage === "京 ME 触达" ? (
+          <JingmeCardsPage />
         ) : (
           <ModulePage page={activePage} onBack={() => navigate("总览")} />
         )}

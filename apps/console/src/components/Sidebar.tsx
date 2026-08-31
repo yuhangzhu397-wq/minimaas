@@ -8,6 +8,7 @@ import {
   GaugeIcon,
   GearIcon,
   KeyIcon,
+  MegaphoneIcon,
   PlugsConnectedIcon,
   StackSimpleIcon,
   TreeStructureIcon,
@@ -36,6 +37,7 @@ export const navigationGroups = [
     items: [
       ["用量账单", WalletIcon],
       ["评测中心", ChartBarIcon],
+      ["京 ME 触达", MegaphoneIcon],
       ["系统设置", GearIcon],
     ],
   },

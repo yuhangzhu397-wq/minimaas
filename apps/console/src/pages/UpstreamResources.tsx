@@ -230,6 +230,13 @@ const getWaterModelDetailId = () => {
     : null;
 };
 
+const getWaterModelPinUsageId = () => {
+  const parts = window.location.hash.replace(/^#\/?/u, "").split("/");
+  return parts[0] === "water-level" && parts[1] === "models" && parts[2] && parts[3] === "usage"
+    ? parts[2]
+    : null;
+};
+
 const getWaterModelUsageMonitorId = () => {
   const parts = window.location.hash.replace(/^#\/?/u, "").split("/");
   return parts[0] === "water-level" && parts[1] === "models" && parts[2] && parts[3] === "monitor"
@@ -295,6 +302,82 @@ const modelWaterRows: ModelWaterRow[] = [
   { id: "qwen-plus", name: "qwen-plus", aliases: "千问 · 增强", providers: 2, endpoints: 4, healthyEndpoints: 4, rpm: 27_600, rpmLimit: 80_000, tpm: 1_640_000, tpmLimit: 4_000_000, totalTokens: 324_902_748, failureRate: 0.09, error4xxRate: 0.06, error5xxRate: 0.03, totalCalls: 100_000, failedCalls: 90, averageDuration: 10.8, firstTokenLatency: 0.9, state: "healthy" },
   { id: "claude-sonnet", name: "Claude-3.7-Sonnet", aliases: "Anthropic Sonnet", providers: 1, endpoints: 2, healthyEndpoints: 1, rpm: 12_800, rpmLimit: 30_000, tpm: 420_000, tpmLimit: 1_000_000, totalTokens: 152_388_239, failureRate: 0.72, error4xxRate: 0.33, error5xxRate: 0.39, totalCalls: 53_817, failedCalls: 388, averageDuration: 25.7, firstTokenLatency: 2.4, state: "warning" },
 ];
+
+type ModelPinUsageRow = {
+  pinId: string;
+  code: string;
+  name: string;
+  tpm: number;
+  tpmLimit: number;
+  tpmPeak: number;
+  rpm: number;
+  rpmLimit: number;
+  rpmPeak: number;
+  totalTokens: number;
+  totalCalls: number;
+  failedCalls: number;
+  failureRate: number;
+  usageShare: number;
+  lastActive: string;
+};
+
+const modelPinUsageShares = [
+  { pinId: "cloudwise", share: 0.38, lastActive: "14:31:22" },
+  { pinId: "njzk", share: 0.22, lastActive: "14:30:58" },
+  { pinId: "rscenterch", share: 0.16, lastActive: "14:29:47" },
+  { pinId: "joyclaw", share: 0.11, lastActive: "14:28:16" },
+  { pinId: "context-in", share: 0.07, lastActive: "14:26:03" },
+  { pinId: "sjhl02", share: 0.06, lastActive: "14:24:51" },
+] as const;
+
+const allocateByShares = (total: number, shares: readonly number[]) => {
+  const allocations: number[] = [];
+  let allocated = 0;
+  shares.forEach((share, index) => {
+    const value = index === shares.length - 1
+      ? Math.max(0, total - allocated)
+      : Math.round(total * share);
+    allocations.push(value);
+    allocated += value;
+  });
+  return allocations;
+};
+
+const getModelPinUsageRows = (model: ModelWaterRow, activityScale = 1): ModelPinUsageRow[] => {
+  const totalTokens = Math.round(model.totalTokens * activityScale);
+  const totalCalls = Math.round(model.totalCalls * activityScale);
+  const totalFailedCalls = Math.round(model.failedCalls * activityScale);
+  const tokenAllocations = allocateByShares(totalTokens, modelPinUsageShares.map((item) => item.share));
+  const callAllocations = allocateByShares(totalCalls, modelPinUsageShares.map((item) => item.share));
+  const failureAllocations = allocateByShares(totalFailedCalls, modelPinUsageShares.map((item) => item.share));
+
+  return modelPinUsageShares.map((item, index) => {
+    const pin = pinResources.find((resource) => resource.id === item.pinId) ?? pinResources[0];
+    const calls = callAllocations[index];
+    const failedCalls = failureAllocations[index];
+    const tpm = Math.round(model.tpm * item.share * activityScale);
+    const tpmLimit = Math.max(1, Math.round(model.tpmLimit * item.share));
+    const rpm = Math.round(model.rpm * item.share * activityScale);
+    const rpmLimit = Math.max(1, Math.round(model.rpmLimit * item.share));
+    return {
+      pinId: pin.id,
+      code: pin.code,
+      name: pin.name,
+      tpm,
+      tpmLimit,
+      tpmPeak: numericCapacityPeak(tpm, tpmLimit, Number.isFinite(activityScale) && activityScale < 1 ? 1.18 : 1.09),
+      rpm,
+      rpmLimit,
+      rpmPeak: numericCapacityPeak(rpm, rpmLimit, Number.isFinite(activityScale) && activityScale < 1 ? 1.2 : 1.34),
+      totalTokens: tokenAllocations[index],
+      totalCalls: calls,
+      failedCalls,
+      failureRate: calls ? (failedCalls / calls) * 100 : 0,
+      usageShare: totalTokens ? (tokenAllocations[index] / totalTokens) * 100 : 0,
+      lastActive: item.lastActive,
+    };
+  });
+};
 
 const modelRealtimeActivityScale = 4_267 / 1_253_817;
 
@@ -609,6 +692,30 @@ const supplierRealtimeRows = [
     averageDuration: 20.4,
   },
 ];
+
+const supplier429Counts: Record<string, number> = {
+  qingcheng: 0,
+  doubao: 88,
+  aliyun: 23,
+  "jd-build": 16,
+  "jd-yanxi": 0,
+  cloudwise: 314,
+  tencent: 9,
+};
+
+const supplierRealtime429Counts: Record<string, number> = {
+  doubao: 0,
+  aliyun: 3,
+  qingcheng: 0,
+  "jd-build": 0,
+  "shenzhen-mobile": 1,
+  tencent: 0,
+  "jd-yanxi": 0,
+  cloudwise: 9,
+  fengfeng: 1,
+  senhua: 0,
+  yunqingyang: 0,
+};
 
 function compactNumber(value: number) {
   if (value >= 100_000_000) return `${(value / 100_000_000).toFixed(2)}亿`;
@@ -2499,6 +2606,7 @@ function SupplierMonitoringOverview() {
             <span>供应商名称</span>
             <span>TPM 容量 / 峰值（千tokens/min）</span>
             <span>RPM 容量 / 峰值（次/min）</span>
+            <span>429 次数 ↓</span>
             <span>失败率 ↓</span>
             <span>4xx 错误率 ↓</span>
             <span>5xx 错误率 ↓</span>
@@ -2511,11 +2619,13 @@ function SupplierMonitoringOverview() {
             </span>
             <span>操作</span>
           </div>
-          {rows.map((supplier) => (
-            <div
-              className={`supplier-monitor-row ${isRealtime ? "realtime" : ""}`}
-              key={supplier.id}
-            >
+          {rows.map((supplier) => {
+            const rateLimit429 = (isRealtime ? supplierRealtime429Counts : supplier429Counts)[supplier.id] ?? 0;
+            return (
+              <div
+                className={`supplier-monitor-row ${isRealtime ? "realtime" : ""}`}
+                key={supplier.id}
+              >
               {isRealtime ? (
                 <span><StatusBadge decision={resolveMonitoringStatus({
                   rpmUtilization: supplier.rpmRate,
@@ -2535,6 +2645,9 @@ function SupplierMonitoringOverview() {
               </button>
               <CapacityValue value={supplier.tpm} peakFactor={isRealtime ? 1.24 : 2.8} utilization={supplier.tpmRate} />
               <CapacityValue value={supplier.rpm} peakFactor={isRealtime ? 1.28 : 3.2} utilization={supplier.rpmRate} />
+              <span className={`tabular pin-rate ${rateLimit429 === 0 ? "safe" : rateLimit429 >= 100 ? "danger" : "warning"}`}>
+                {numberFormat.format(rateLimit429)}
+              </span>
               <span
                 className={`tabular pin-rate ${
                   supplier.failureRate === 0
@@ -2567,8 +2680,9 @@ function SupplierMonitoringOverview() {
                 <PulseIcon size={15} />
                 供应商监控
               </button>
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -3259,6 +3373,45 @@ function ModelCapacity({
   return <CapacityMeter used={used} limit={limit} peak={observedPeak} />;
 }
 
+function ModelPinCapacityWaterline({
+  configured,
+  limit,
+  peak,
+}: {
+  configured: number;
+  limit: number;
+  peak: number;
+}) {
+  const safeLimit = Math.max(limit, 1);
+  const remainder = Math.max(limit - configured, 0);
+  const p50 = Math.round(Math.min(configured * 0.76, peak * 0.58));
+  const p99 = Math.round(Math.max(p50, Math.min(peak * 0.82, safeLimit * 0.92)));
+  const markerPosition = (value: number) => `${Math.min(Math.max((value / safeLimit) * 100, 0), 100)}%`;
+  const overLimit = peak > limit;
+
+  return (
+    <div className="model-pin-capacity-waterline">
+      <div className="model-pin-capacity-primary">
+        <span>用户配置量 <strong className="tabular">{capacityNumberFormat.format(configured)}</strong></span>
+        <span>余量 <strong className="tabular">{capacityNumberFormat.format(remainder)}</strong></span>
+        <span>上限 <strong className="tabular">{capacityNumberFormat.format(limit)}</strong></span>
+      </div>
+      <div className="model-pin-capacity-percentiles">
+        <span>P50 <strong className="tabular">{capacityNumberFormat.format(p50)}</strong></span>
+        <span>P99 <strong className="tabular">{capacityNumberFormat.format(p99)}</strong></span>
+        <span>峰值 <strong className="tabular">{capacityNumberFormat.format(peak)}</strong></span>
+      </div>
+      <div className={`model-pin-capacity-track ${overLimit ? "over-limit" : ""}`}>
+        <i style={{ width: markerPosition(configured) }} />
+        <b className="p50" style={{ left: markerPosition(p50) }} aria-hidden="true" />
+        <b className="p99" style={{ left: markerPosition(p99) }} aria-hidden="true" />
+        <b className="peak" style={{ left: markerPosition(peak) }} aria-hidden="true" />
+      </div>
+      {overLimit ? <small>峰值超限 +{((peak / safeLimit - 1) * 100).toFixed(1)}%</small> : null}
+    </div>
+  );
+}
+
 function ModelWaterDetail({ model, onBack }: { model: ModelWaterRow; onBack: () => void }) {
   const [mode, setMode] = useState<"history" | "realtime">("history");
   const isRealtime = mode === "realtime";
@@ -3350,21 +3503,74 @@ function EndpointUsageMonitorDetail({ model, endpoint, onBack }: { model: ModelW
   return <main className="water-level-page model-monitor-detail-page"><header className="supplier-monitor-breadcrumb model-monitor-breadcrumb"><button type="button" aria-label="返回构成管理" onClick={onBack}><ArrowLeftIcon size={17} /></button><strong>构成管理</strong><b>/</b><strong>端点监控</strong><b>/</b><em>{endpoint.endpoint}</em></header><section className={`model-monitor-filter ${isRealtime ? "realtime" : ""}`} aria-label="端点监控筛选"><div className="supplier-monitor-mode"><button className={!isRealtime ? "active" : ""} type="button" onClick={() => setMode("history")}>历史筛选</button><button className={isRealtime ? "active" : ""} type="button" onClick={() => { setMode("realtime"); setMonitorTab("调用统计"); }}>实时监控</button></div>{isRealtime ? <><label className="model-monitor-live-range"><span>时间范围</span><button type="button">最近 5 分钟 <PencilSimpleIcon size={12} /></button></label><label className="model-monitor-live-refresh"><span>刷新间隔</span><button type="button">30 秒 <PencilSimpleIcon size={12} /></button></label></> : <><label><span>时间范围</span><select defaultValue="今天"><option>今天</option><option>自定义</option></select></label><div className="pin-date-range model-monitor-date"><span>2026-07-27 00:00:00</span><ArrowRightIcon size={15} /><span>2026-07-27 11:20:32</span></div></>}<label className="model-monitor-pin-select"><span>模型</span><select defaultValue={model.name}><option>{model.name}</option></select></label><label><span>统计维度</span><select defaultValue="按分钟"><option>按分钟</option><option>按小时</option></select></label><button className="pin-search-button" type="button" aria-label="查询端点监控"><MagnifyingGlassIcon size={17} weight="bold" /></button><button className="pin-refresh-button" type="button" aria-label="刷新端点监控"><ArrowClockwiseIcon size={17} /></button></section><section className="model-monitor-stat-shell"><nav className="model-monitor-tabs" aria-label="端点使用量统计"><button className={tab === "调用统计" ? "active" : ""} type="button" onClick={() => setMonitorTab("调用统计")}>调用统计</button><button className={tab === "性能统计" ? "active" : ""} type="button" onClick={() => setMonitorTab("性能统计")}>性能统计</button></nav>{tab === "调用统计" ? <div className="model-monitor-chart-stack"><ModelChartPanel title="调用次数趋势" subtitle="该端点总调用 / 成功 / 失败" data={series} domain={isRealtime ? [0, 1] : undefined} lines={[{ dataKey: "calls", name: "总调用次数", color: "#62d6aa", strokeWidth: 1.6 }, { dataKey: "success", name: "成功调用", color: "#74d9b4", strokeWidth: 1.2 }, { dataKey: "failed", name: "失败调用", color: "#ff6b72", strokeWidth: 1.2 }]}><MetricPill color="#4595ff" label="总调用次数" value={isRealtime ? "0" : "428,910"} /><MetricPill color="#21c892" label="成功调用" value={isRealtime ? "0" : "428,566"} /><MetricPill color="#ff5d63" label="失败调用" value={isRealtime ? "0" : "344"} /></ModelChartPanel><ModelChartPanel title="失败率趋势" subtitle="该端点失败调用占总调用的百分比" data={series} domain={isRealtime ? [0, 1] : undefined} yFormatter={(value) => `${value}%`} lines={[{ dataKey: "failureRate", name: "失败率", color: "#ff6b72", strokeWidth: 1.4 }]}><MetricPill color="#ff5d63" label="失败率" value={`${endpoint.failure.toFixed(2)}%`} /></ModelChartPanel><ModelChartPanel title="平均 Token 趋势" subtitle="该端点单次调用平均输入 / 输出 Token" data={series} lines={[{ dataKey: "avgInput", name: "平均输入 Token", color: "#cf6adf", strokeWidth: 1.35 }, { dataKey: "avgOutput", name: "平均输出 Token", color: "#7ea1ff", strokeWidth: 1.35 }]} yFormatter={(value) => `${Number(value / 1000).toFixed(0)}K`}><MetricPill color="#cf6adf" label="平均输入 Token" value="3.24K" /><MetricPill color="#6f90f1" label="平均输出 Token" value="1.91K" /></ModelChartPanel><ModelChartPanel title="Token 消耗趋势" subtitle="该端点总 Token / 输入 Token / 输出 Token" data={series} lines={[{ dataKey: "totalToken", name: "总 Token", color: "#8dd0eb", strokeWidth: 1.35 }, { dataKey: "inputToken", name: "输入 Token", color: "#ffad89", strokeWidth: 1.25 }, { dataKey: "outputToken", name: "输出 Token", color: "#b798ff", strokeWidth: 1.25 }]} yFormatter={(value) => `${Number(value / 1_000_000).toFixed(0)}M`}><MetricPill color="#8dd0eb" label="总 Token" value="2,223.42M" /></ModelChartPanel></div> : <div className="model-monitor-chart-stack performance"><ModelChartPanel className="half" title="RPM 趋势" subtitle="该端点平均每分钟请求数。" data={series} domain={[0, endpointRpmLimit]} referenceLine={{ value: endpointRpmLimit, label: `流控线 ${numberFormat.format(endpointRpmLimit)}`, color: "#ffad42" }} lines={[{ dataKey: "rpm", name: "RPM", color: "#6f90f1", strokeWidth: 1.2 }]} yFormatter={(value) => numberFormat.format(value)}><MetricPill color="#6f90f1" label="RPM" value={numberFormat.format(endpointRpm)} /><MetricPill color="#e39a31" label="窗口峰值" value={numberFormat.format(numericCapacityPeak(endpointRpm, endpointRpmLimit, isRealtime ? 1.18 : 1.36))} /></ModelChartPanel><ModelChartPanel className="half" title="TPM 趋势" subtitle="该端点每分钟 Token 吞吐量。" data={series} domain={[0, endpointTpmLimit]} referenceLine={{ value: endpointTpmLimit, label: `流控线 ${numberFormat.format(endpointTpmLimit)}`, color: "#ffad42" }} lines={[{ dataKey: "tpm", name: "TPM", color: "#57c5b7", strokeWidth: 1.25 }]} yFormatter={(value) => numberFormat.format(value)}><MetricPill color="#31aa9f" label="TPM" value={numberFormat.format(endpointTpm)} /><MetricPill color="#e39a31" label="窗口峰值" value={numberFormat.format(numericCapacityPeak(endpointTpm, endpointTpmLimit, isRealtime ? 1.12 : 1.08))} /></ModelChartPanel><ModelChartPanel className="wide" title="调用时长趋势" subtitle="该端点的平均 / P50 / P99 调用时长" data={series} domain={[0, 360]} lines={[{ dataKey: "avgDuration", name: "平均调用时长", color: "#5d8cff", strokeWidth: 1.15 }, { dataKey: "p50Duration", name: "P50 调用时长", color: "#66d7b3", strokeWidth: 1.15 }, { dataKey: "p99Duration", name: "P99 调用时长", color: "#ff7d8a", strokeWidth: 1.15 }]} yFormatter={(value) => `${value}ms`}><MetricPill color="#5d8cff" label="平均调用时长" value="14.2s" /></ModelChartPanel><ModelChartPanel className="wide" title="平均首 Token 延迟" subtitle="该端点的首 Token 返回耗时" data={series} domain={[0, 13]} lines={[{ dataKey: "avgTokenLatency", name: "平均首Token耗时", color: "#57c5b7", strokeWidth: 1.15, area: true }]} yFormatter={(value) => `${value}ms`}><MetricPill color="#57c5b7" label="平均首Token耗时" value="0.7s" /></ModelChartPanel></div>}</section></main>;
 }
 
+function ModelPinUsageDetail({ model, onBack }: { model: ModelWaterRow; onBack: () => void }) {
+  const [mode, setMode] = useState<"history" | "realtime">("history");
+  const [query, setQuery] = useState("");
+  const [sortBy, setSortBy] = useState<"tokens" | "calls" | "share">("tokens");
+  const [page, setPage] = useState(1);
+  const [refreshing, setRefreshing] = useState(false);
+  const isRealtime = mode === "realtime";
+  const activityScale = isRealtime ? modelRealtimeActivityScale : 1;
+  const rows = useMemo(() => getModelPinUsageRows(model, activityScale), [model, activityScale]);
+  const filteredRows = useMemo(() => {
+    const normalizedQuery = query.trim().toLowerCase();
+    const nextRows = normalizedQuery
+      ? rows.filter((row) => `${row.code} ${row.name}`.toLowerCase().includes(normalizedQuery))
+      : rows;
+    return [...nextRows].sort((left, right) => {
+      if (sortBy === "calls") return right.totalCalls - left.totalCalls;
+      if (sortBy === "share") return right.usageShare - left.usageShare;
+      return right.totalTokens - left.totalTokens;
+    });
+  }, [query, rows, sortBy]);
+  const pageSize = 5;
+  const pageCount = Math.max(1, Math.ceil(filteredRows.length / pageSize));
+  const visibleRows = filteredRows.slice((page - 1) * pageSize, page * pageSize);
+  const totalTokens = Math.round(model.totalTokens * activityScale);
+  const totalCalls = Math.round(model.totalCalls * activityScale);
+  const failedCalls = Math.round(model.failedCalls * activityScale);
+
+  useEffect(() => setPage(1), [query, sortBy, isRealtime]);
+
+  return <main className="water-level-page model-pin-usage-page">
+    <header className="supplier-monitor-breadcrumb model-monitor-breadcrumb">
+      <button type="button" aria-label="返回模型监控" onClick={onBack}><ArrowLeftIcon size={17} /></button>
+      <strong>模型监控</strong><b>/</b><em>用量管理 - {model.name}</em>
+    </header>
+    <section className={`model-pin-usage-filter ${isRealtime ? "realtime" : ""}`} aria-label="模型用量筛选">
+      <div className="supplier-monitor-mode"><button type="button" className={!isRealtime ? "active" : ""} onClick={() => setMode("history")}>历史筛选</button><button type="button" className={isRealtime ? "active" : ""} onClick={() => setMode("realtime")}>实时监控</button></div>
+      {isRealtime ? <><label><span>时间范围</span><button type="button">最近 5 分钟 <PencilSimpleIcon size={12} /></button></label><label><span>刷新间隔</span><button type="button">30 秒 <PencilSimpleIcon size={12} /></button></label></> : <><label><span>时间范围</span><select defaultValue="今天"><option>今天</option><option>近 7 天</option><option>自定义</option></select></label><div className="pin-date-range"><span>2026-07-27 00:00:00</span><ArrowRightIcon size={15} /><span>2026-07-27 11:20:32</span></div></>}
+      <label className="model-pin-usage-sort"><span>排序</span><select value={sortBy} onChange={(event) => setSortBy(event.target.value as "tokens" | "calls" | "share")}><option value="tokens">Token 用量</option><option value="calls">调用总量</option><option value="share">用量占比</option></select></label>
+      <div className="model-pin-usage-search"><MagnifyingGlassIcon size={15} /><input aria-label="搜索 PIN 编码或用户名称" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索 PIN 编码 / 用户名称" /></div>
+      <button type="button" className="pin-search-button" aria-label="查询模型用量"><MagnifyingGlassIcon size={17} weight="bold" /></button>
+      <button type="button" className={`pin-refresh-button ${refreshing ? "refreshing" : ""}`} aria-label="刷新模型用量" onClick={() => { setRefreshing(true); window.setTimeout(() => setRefreshing(false), 500); }}><ArrowClockwiseIcon size={17} /></button>
+    </section>
+    <section className="model-pin-usage-summary" aria-label="模型用量概览">
+      <article><span>使用 PIN 数</span><strong>{rows.length}</strong><small>当前模型有用量记录的 PIN</small></article><article><span>总 Token 数</span><strong>{numberFormat.format(totalTokens)}</strong><small>当前筛选时间范围</small></article><article><span>总调用量</span><strong>{numberFormat.format(totalCalls)}</strong><small>包含成功与失败调用</small></article><article className="danger"><span>调用失败量</span><strong>{numberFormat.format(failedCalls)}</strong><small>{totalCalls ? `${((failedCalls / totalCalls) * 100).toFixed(2)}% 失败率` : "暂无调用"}</small></article>
+    </section>
+    <section className="model-pin-usage-table-shell"><div className="model-pin-usage-table"><div className="model-pin-usage-row model-pin-usage-head"><span>PIN 编码</span><span>用户名称</span><span>TPM 运行状况（Token/min）</span><span>RPM 运行状况（次/min）</span><span>总 Token 数 ↓</span><span>用量占比</span><span>调用总量 ↓</span><span>调用失败量 ↓</span><span>失败率</span><span>最近调用时间</span></div>{visibleRows.map((row) => <div className="model-pin-usage-row" key={row.pinId}><strong>{row.code}</strong><span>{row.name}</span><ModelPinCapacityWaterline configured={row.tpm} limit={row.tpmLimit} peak={row.tpmPeak} /><ModelPinCapacityWaterline configured={row.rpm} limit={row.rpmLimit} peak={row.rpmPeak} /><span className="tabular">{numberFormat.format(row.totalTokens)}</span><span className="tabular">{row.usageShare.toFixed(1)}%</span><span className="tabular">{numberFormat.format(row.totalCalls)}</span><span className="tabular pin-failed">{numberFormat.format(row.failedCalls)}</span><span className={`tabular pin-rate ${row.failureRate === 0 ? "safe" : row.failureRate >= 1 ? "danger" : "warning"}`}>{row.failureRate.toFixed(2)}%</span><span className="tabular">{row.lastActive}</span></div>)}{visibleRows.length === 0 ? <div className="upstream-empty">暂无符合条件的 PIN 用量。</div> : null}</div></section>
+    <footer className="pin-monitor-pagination model-pin-usage-pagination"><span>共 {filteredRows.length} 条</span><div><button type="button" aria-label="上一页" disabled={page === 1} onClick={() => setPage((value) => Math.max(1, value - 1))}><ArrowLeftIcon size={14} /></button>{Array.from({ length: pageCount }, (_, index) => index + 1).map((item) => <button type="button" className={page === item ? "active" : ""} key={item} onClick={() => setPage(item)}>{item}</button>)}<button type="button" aria-label="下一页" disabled={page === pageCount} onClick={() => setPage((value) => Math.min(pageCount, value + 1))}><ArrowRightIcon size={14} /></button><select aria-label="每页条数" defaultValue="5"><option value="5">5 / 页</option></select></div></footer>
+  </main>;
+}
+
 function SupplierModelManagement() {
   const [selectedModel, setSelectedModel] = useState("all");
   const [mode, setMode] = useState<"history" | "realtime">("history");
   const [refreshing, setRefreshing] = useState(false);
   const [detailId, setDetailId] = useState(getWaterModelDetailId);
   const [usageMonitorId, setUsageMonitorId] = useState(getWaterModelUsageMonitorId);
+  const [pinUsageId, setPinUsageId] = useState(getWaterModelPinUsageId);
   const [endpointMonitor, setEndpointMonitor] = useState(getWaterEndpointUsageMonitor);
 
-  useEffect(() => { const sync = () => { setDetailId(getWaterModelDetailId()); setUsageMonitorId(getWaterModelUsageMonitorId()); setEndpointMonitor(getWaterEndpointUsageMonitor()); }; window.addEventListener("hashchange", sync); return () => window.removeEventListener("hashchange", sync); }, []);
+  useEffect(() => { const sync = () => { setDetailId(getWaterModelDetailId()); setUsageMonitorId(getWaterModelUsageMonitorId()); setPinUsageId(getWaterModelPinUsageId()); setEndpointMonitor(getWaterEndpointUsageMonitor()); }; window.addEventListener("hashchange", sync); return () => window.removeEventListener("hashchange", sync); }, []);
   const usageMonitor = modelWaterRows.find((item) => item.id === usageMonitorId);
+  const pinUsageModel = modelWaterRows.find((item) => item.id === pinUsageId);
   const endpointModel = modelWaterRows.find((item) => item.id === endpointMonitor?.modelId);
   const endpointSource = modelWaterSources.find((item) => item.endpoint === endpointMonitor?.endpoint);
   const detail = modelWaterRows.find((item) => item.id === detailId);
   if (endpointModel && endpointSource) return <EndpointUsageMonitorDetail model={endpointModel} endpoint={endpointSource} onBack={() => { window.location.hash = `/water-level/models/${endpointModel.id}`; }} />;
   if (usageMonitor) return <ModelUsageMonitorDetail model={usageMonitor} onBack={() => { window.location.hash = `/water-level/models/${usageMonitor.id}`; }} />;
+  if (pinUsageModel) return <ModelPinUsageDetail model={pinUsageModel} onBack={() => { window.location.hash = "/water-level/models"; }} />;
   if (detail) return <ModelWaterDetail model={detail} onBack={() => { window.location.hash = "/water-level/models"; }} />;
 
   const isRealtime = mode === "realtime";
@@ -3412,7 +3618,7 @@ function SupplierModelManagement() {
               <span className="tabular pin-latency">{(isRealtime ? item.firstTokenLatency * 1.1 : item.firstTokenLatency).toFixed(1)}</span>
               <div className="model-water-supply"><strong>{item.providers} 家</strong><small>可用供应商</small></div>
               <div className="model-water-endpoints"><strong>{item.healthyEndpoints} / {item.endpoints}</strong><small>端点健康</small></div>
-              <div className="model-water-actions"><button type="button" className="pin-model-action" onClick={() => { window.location.hash = `/water-level/models/${item.id}`; }}><PulseIcon size={15} /> 构成管理</button><button type="button" className="pin-model-action" onClick={() => { window.location.hash = `/water-level/models/${item.id}/monitor`; }}><PulseIcon size={15} /> 模型监控</button></div>
+              <div className="model-water-actions"><button type="button" className="pin-model-action" onClick={() => { window.location.hash = `/water-level/models/${item.id}`; }}><PulseIcon size={15} /> 构成管理</button><button type="button" className="pin-model-action" onClick={() => { window.location.hash = `/water-level/models/${item.id}/usage`; }}><PulseIcon size={15} /> 用量管理</button><button type="button" className="pin-model-action" onClick={() => { window.location.hash = `/water-level/models/${item.id}/monitor`; }}><PulseIcon size={15} /> 模型监控</button></div>
             </div>
           );
         })}

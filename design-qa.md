@@ -41,4 +41,26 @@ No actionable P0, P1, or P2 differences remain.
 - [x] Sticky operation column verified
 - [x] TypeScript check and production build passed
 
+## Route strategy visual refresh
+
+- Reference: `/var/folders/jl/dtjb2p855g94jmhrvdsx55bh0000gp/T/codex-clipboard-68254999-7d35-46ba-9bd2-caacf3af385f.png`
+- Reference viewport: 2998 × 1600 desktop
+- Implementation: `#/routes` in the local console
+- Scope: `.traffic-policy-page` and its descendants only; shared sidebar, header, and other modules were not changed by this visual pass.
+
+### Checks
+
+- Reworked route surfaces to the reference language: spacious white cards, 1px gray borders, 12px radius, black/gray type hierarchy, blue operational links, quiet gray canvas, and table row spacing.
+- Kept the route module's strategy-management interaction model: PIN overview, PIN→model drill-down, search, three-step strategy editing, detail, version history, copy, approval, and disable actions.
+- Removed runtime-oriented surfaces from this module: data freshness, simulation, live capacity, score explanations, expected traffic share, monitoring jumps, and runtime metrics.
+- Collapsed the editor to one scoped content column after removing the simulation/explanation sidebar; the remaining detail and preference cards use the same `.traffic-policy-page` namespace.
+- Added responsive states for desktop, tablet, and narrow screens under the same route namespace.
+- `pnpm --filter @minimaas/console typecheck` passed.
+- `pnpm --filter @minimaas/console build` passed.
+- `pnpm --filter @minimaas/console test` passed (8 tests).
+- `git diff --check` passed.
+- Local Vite entry responded successfully at `/`.
+
+The in-app browser session currently rejects localhost navigation through its URL policy after the dev server restart, so this pass used the supplied reference dimensions plus scoped CSS/DOM review and build-time verification. No shared-module selectors were introduced.
+
 final result: passed

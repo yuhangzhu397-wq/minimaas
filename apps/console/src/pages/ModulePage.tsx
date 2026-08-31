@@ -23,6 +23,9 @@ const modules: Record<
   评测中心: {
     description: "用可重复的评测集验证模型与路由策略的质量。",
   },
+  "京 ME 触达": {
+    description: "编辑可跳转的京 ME 消息卡片，向指定用户发送并追踪结果。",
+  },
   系统设置: {
     description: "管理网关运行参数、供应商连接和配置快照。",
   },

@@ -2070,13 +2070,14 @@ button.registry-row.selected {
 .model-water-section-title > div { display: grid; gap: 4px; }
 .model-water-section-title strong { color: #224f94; font-size: 11px; }
 .model-water-table { overflow-x: auto; }
-.model-water-row { min-width: 2246px; min-height: 68px; display: grid; grid-template-columns: 104px 210px 225px 235px 150px 90px 100px 100px 125px 120px 112px 130px 140px 155px 250px; align-items: center; color: #3f4750; font-size: 10px; border-bottom: 1px solid #e7ebf0; }
-.model-water-row.history { min-width: 2142px; grid-template-columns: 210px 225px 235px 150px 90px 100px 100px 125px 120px 112px 130px 140px 155px 250px; }
+.model-water-row { min-width: 2376px; min-height: 68px; display: grid; grid-template-columns: 104px 210px 225px 235px 150px 90px 100px 100px 125px 120px 112px 130px 140px 155px 380px; align-items: center; color: #3f4750; font-size: 10px; border-bottom: 1px solid #e7ebf0; }
+.model-water-row.history { min-width: 2272px; grid-template-columns: 210px 225px 235px 150px 90px 100px 100px 125px 120px 112px 130px 140px 155px 380px; }
 .model-water-row:nth-child(odd):not(.model-water-head) { background: #fafbfe; }
 .model-water-row > * { min-width: 0; padding: 0 14px; }
 .model-water-head { min-height: 48px; position: sticky; top: 0; z-index: 2; color: #9099a7; font-size: 9px; background: #fff; }
 .model-water-row > :last-child { position: sticky; right: 0; z-index: 1; height: 100%; display: flex; align-items: center; justify-content: center; background: inherit; box-shadow: -5px 0 12px rgb(33 40 51 / 6%); }
 .model-water-actions { display: flex !important; align-items: center; justify-content: center; gap: 6px; }
+.model-water-actions .pin-model-action { width: 112px; }
 .model-water-name { display: grid; gap: 5px; padding: 0 14px; border: 0; background: transparent; color: #343a43; text-align: left; cursor: pointer; }
 .model-water-name strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; font-weight: 600; }
 .model-water-name small,
@@ -2098,6 +2099,65 @@ button.registry-row.selected {
 .model-water-table.detail .model-water-row.history { min-width: 1485px; grid-template-columns: 170px 190px 120px 230px 245px 100px 120px 150px 160px; }
 .model-water-table.detail .model-water-row.realtime { min-width: 1590px; grid-template-columns: 104px 170px 190px 120px 230px 245px 100px 120px 150px 160px; }
 .model-water-table.detail .model-water-row > :last-child { position: static; box-shadow: none; }
+
+/* Model usage by PIN */
+.model-pin-usage-page { gap: 14px; padding-top: 14px; }
+.model-pin-usage-filter { min-height: 64px; display: flex; align-items: center; gap: 8px; padding: 10px 12px; overflow-x: auto; border: 1px solid #e1e6ee; border-radius: 9px; background: #fff; }
+.model-pin-usage-filter > label { display: flex; align-items: center; gap: 8px; color: #5c6777; font-size: 10px; white-space: nowrap; }
+.model-pin-usage-filter > label > select { height: 36px; min-width: 112px; padding: 0 28px 0 11px; border: 1px solid #d8dfe8; border-radius: 5px; background: #fff; color: #596778; font-size: 10px; }
+.model-pin-usage-filter > label > button { height: 36px; display: inline-flex; align-items: center; gap: 5px; padding: 0 10px; border: 1px solid #d8dfe8; border-radius: 5px; background: #f8fbff; color: #4d607a; font-size: 10px; font-weight: 600; cursor: pointer; }
+.model-pin-usage-filter .pin-date-range { min-width: 304px; }
+.model-pin-usage-sort select { min-width: 116px !important; color: #48617f !important; background: #f8fbff !important; }
+.model-pin-usage-search { width: 220px; height: 36px; display: flex; align-items: center; gap: 7px; padding: 0 10px; border: 1px solid #d8dfe8; border-radius: 5px; background: #fff; color: #8390a0; }
+.model-pin-usage-search input { width: 100%; min-width: 0; border: 0; outline: 0; color: #485566; font-size: 10px; background: transparent; }
+.model-pin-usage-search input::placeholder { color: #9ba6b3; }
+.model-pin-usage-filter .pin-search-button,
+.model-pin-usage-filter .pin-refresh-button { width: 38px; height: 36px; flex: 0 0 auto; }
+.model-pin-usage-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; padding: 14px; border: 1px solid #e1e6ee; border-radius: 9px; background: #fff; }
+.model-pin-usage-summary article { min-height: 86px; display: grid; align-content: center; gap: 8px; padding: 12px 16px; border: 1px solid #e3e9f0; border-radius: 9px; background: #fbfcfe; }
+.model-pin-usage-summary span { color: #6f8198; font-size: 9px; font-weight: 600; }
+.model-pin-usage-summary strong { color: #2d3138; font-size: 24px; line-height: 1; font-variant-numeric: tabular-nums; }
+.model-pin-usage-summary small { color: #74859c; font-size: 8px; font-weight: 600; }
+.model-pin-usage-summary .danger strong { color: #ff3948; }
+.model-pin-usage-table-shell { overflow: hidden; border: 1px solid #e1e6ee; border-radius: 9px; background: #fff; }
+.model-pin-usage-table { overflow-x: auto; }
+.model-pin-usage-row { min-width: 1835px; min-height: 92px; display: grid; grid-template-columns: 145px 180px 330px 330px 170px 95px 145px 130px 95px 145px; align-items: center; color: #3f4750; font-size: 10px; border-bottom: 1px solid #e7ebf0; }
+.model-pin-usage-row:nth-child(odd):not(.model-pin-usage-head) { background: #fafbfe; }
+.model-pin-usage-row > * { min-width: 0; padding: 0 14px; }
+.model-pin-usage-head { min-height: 50px; position: sticky; top: 0; z-index: 2; color: #9099a7; font-size: 9px; background: #fff; }
+.model-pin-usage-row > strong { overflow: hidden; color: #3e4650; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.model-pin-usage-row > :nth-child(2) { color: #586574; }
+.model-pin-usage-row > :nth-child(3),
+.model-pin-usage-row > :nth-child(4) { min-width: 0; padding: 0 8px; }
+.model-pin-usage-row > .capacity-meter { gap: 4px; padding: 0 8px; }
+.model-pin-usage-row > .capacity-meter > span { font-size: 9px; }
+.model-pin-usage-row > .capacity-meter small { gap: 5px; font-size: 8px; }
+.model-pin-usage-row > .capacity-meter i { height: 4px; }
+.model-pin-capacity-waterline { min-width: 0; display: grid; align-content: center; gap: 7px; padding: 0 10px !important; color: #667384; }
+.model-pin-capacity-primary,
+.model-pin-capacity-percentiles { min-width: 0; display: flex; align-items: center; justify-content: space-between; gap: 8px; white-space: nowrap; }
+.model-pin-capacity-primary { color: #6d7784; font-size: 8px; }
+.model-pin-capacity-primary strong { color: #2f353d; font-size: 9px; }
+.model-pin-capacity-percentiles { color: #8893a1; font-size: 8px; }
+.model-pin-capacity-percentiles strong { color: #586575; font-weight: 600; }
+.model-pin-capacity-track { height: 5px; position: relative; border-radius: 4px; background: #e1e6ec; }
+.model-pin-capacity-track > i { height: 100%; display: block; border-radius: 4px; background: #2459b9; }
+.model-pin-capacity-track > b { width: 2px; height: 10px; position: absolute; top: 50%; transform: translate(-50%, -50%); border-radius: 2px; background: #6d7784; }
+.model-pin-capacity-track > b.p99 { background: #ef8d21; }
+.model-pin-capacity-track > b.peak { width: 7px; height: 7px; transform: translate(-50%, -50%) rotate(45deg); border-radius: 1px; background: #e4343b; }
+.model-pin-capacity-track.over-limit > b.peak { box-shadow: 0 0 0 2px rgb(228 52 59 / 16%); }
+.model-pin-capacity-waterline > small { margin-top: -3px; color: #e4343b; font-size: 7px; font-weight: 600; text-align: right; }
+.model-pin-usage-row > :nth-child(5),
+.model-pin-usage-row > :nth-child(6),
+.model-pin-usage-row > :nth-child(7),
+.model-pin-usage-row > :nth-child(8),
+.model-pin-usage-row > :nth-child(9),
+.model-pin-usage-row > :nth-child(10) { font-variant-numeric: tabular-nums; }
+.model-pin-usage-pagination { min-height: 60px; }
+
+@media (max-width: 1140px) {
+  .model-pin-usage-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 .endpoint-level-badge {
   width: fit-content;
   min-width: 72px;
@@ -3487,11 +3547,11 @@ button.registry-row.selected {
   overflow-x: auto;
 }
 .supplier-monitor-row {
-  min-width: 1715px;
+  min-width: 1825px;
   min-height: 52px;
   display: grid;
   grid-template-columns:
-    165px 230px 245px 155px 95px 105px 105px 105px
+    165px 230px 245px 110px 155px 95px 105px 105px 105px
     112px 135px 130px 130px;
   align-items: center;
   color: #353941;
@@ -3500,9 +3560,9 @@ button.registry-row.selected {
   border-bottom: 1px solid #e6e8ed;
 }
 .supplier-monitor-row.realtime {
-  min-width: 1840px;
+  min-width: 1950px;
   grid-template-columns:
-    100px 190px 230px 245px 155px 95px 105px 105px 105px
+    100px 190px 230px 245px 110px 155px 95px 105px 105px 105px
     112px 135px 130px 130px;
 }
 .supplier-monitor-row:nth-child(odd):not(.supplier-monitor-head) {
@@ -6192,7 +6252,68 @@ button.registry-row.selected {
   min-height: 15px;
 }
 
-.token-detail span { color: #9ca8b7; font-size: 9px; }
+.token-detail span {
+  min-width: 0;
+  overflow: hidden;
+  color: #9ca8b7;
+  font-size: 9px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.token-detail-label {
+  position: relative;
+  cursor: help;
+  outline: none;
+}
+
+.token-detail-label::before,
+.token-detail-label::after {
+  position: absolute;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms ease, transform 120ms ease;
+}
+
+.token-detail-label::after {
+  content: attr(data-tooltip);
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: max-content;
+  max-width: 180px;
+  padding: 7px 10px;
+  border-radius: 7px;
+  background: #282828;
+  box-shadow: 0 8px 20px rgb(25 35 51 / 18%);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 650;
+  line-height: 1.35;
+  white-space: normal;
+  transform: translateY(3px);
+}
+
+.token-detail-label::before {
+  content: "";
+  bottom: calc(100% + 3px);
+  left: 14px;
+  border: 5px solid transparent;
+  border-top-color: #282828;
+  transform: translateY(3px);
+}
+
+.token-detail-label:hover,
+.token-detail-label:focus-visible {
+  overflow: visible;
+}
+
+.token-detail-label:hover::before,
+.token-detail-label:hover::after,
+.token-detail-label:focus-visible::before,
+.token-detail-label:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
 .token-detail strong { color: #647084; font-size: 9px; font-weight: 520; text-align: right; }
 .token-detail em { color: #24ae88; font-size: 9px; font-style: normal; text-align: right; white-space: nowrap; }
 .billing-token-total { color: #5d697a !important; font-weight: 620; }
@@ -6276,4 +6397,1495 @@ button.registry-row.selected {
   .billing-tabs-row { align-items: flex-start; flex-direction: column; }
   .billing-granularity { align-self: flex-end; padding-bottom: 7px; }
   .billing-footer-note { align-items: flex-start; flex-direction: column; }
+}
+
+/* Traffic policy module. Every selector is scoped so the existing console modules stay unchanged. */
+.traffic-policy-page { min-height: calc(100vh - 92px); background: var(--canvas); }
+.traffic-policy-main { width: min(100%, 1380px); margin: 0 auto; padding: 34px 40px 68px; }
+.traffic-policy-page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 26px; }
+.traffic-policy-page-head h2 { margin: 8px 0 7px; color: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: clamp(28px, 3vw, 39px); font-weight: 700; letter-spacing: -1.4px; line-height: 1.05; }
+.traffic-policy-page-head p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.traffic-policy-breadcrumb { color: #9aa19b; font-size: 10px; letter-spacing: .04em; }
+.traffic-policy-page-actions { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 9px; }
+.traffic-policy-freshness { display: inline-flex; align-items: center; gap: 6px; min-height: 30px; color: #7d857f; font-size: 10px; white-space: nowrap; }
+.traffic-policy-freshness-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgb(38 118 109 / 10%); }
+.traffic-policy-freshness.stale { color: var(--warning); }
+.traffic-policy-freshness.stale .traffic-policy-freshness-dot { background: var(--warning); box-shadow: 0 0 0 3px rgb(179 75 54 / 10%); }
+.traffic-policy-button { min-height: 34px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 0 13px; border: 1px solid transparent; border-radius: 4px; font-size: 11px; font-weight: 650; cursor: pointer; transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease; }
+.traffic-policy-button:hover:not(:disabled) { transform: translateY(-1px); }
+.traffic-policy-button.primary { border-color: var(--navy); background: var(--navy); color: #fff; box-shadow: 0 5px 14px rgb(24 59 122 / 14%); }
+.traffic-policy-button.primary:hover:not(:disabled) { background: #214b94; }
+.traffic-policy-button.secondary { border-color: #cfd6df; background: #fff; color: #3f4e62; }
+.traffic-policy-button.secondary:hover:not(:disabled) { border-color: #9eb2cd; color: var(--navy); }
+.traffic-policy-button.ghost { padding-inline: 5px; background: transparent; color: #78838d; }
+.traffic-policy-button.ghost:hover:not(:disabled) { color: var(--navy); }
+.traffic-policy-button:disabled { cursor: not-allowed; opacity: .45; transform: none; }
+.traffic-policy-back-link { display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: transparent; color: #79817d; font-size: 11px; cursor: pointer; }
+.traffic-policy-back-link:hover { color: var(--navy); }
+.traffic-policy-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 15px; }
+.traffic-policy-metric { min-height: 122px; padding: 17px 18px 14px; border: 1px solid var(--line); border-radius: 5px; background: #fff; box-shadow: 0 6px 18px rgb(33 48 66 / 3%); }
+.traffic-policy-metric-top { display: flex; align-items: center; justify-content: space-between; color: #818a84; font-size: 10px; }
+.traffic-policy-metric-icon { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 50%; background: #f1f5fb; color: #2f69c9; }
+.traffic-policy-metric.green .traffic-policy-metric-icon { background: #eff8f4; color: var(--teal); }
+.traffic-policy-metric.amber .traffic-policy-metric-icon { background: #fcf7e9; color: var(--amber); }
+.traffic-policy-metric.red .traffic-policy-metric-icon { background: #fff1ef; color: var(--warning); }
+.traffic-policy-metric strong { display: block; margin-top: 12px; color: #263b59; font-size: 25px; font-weight: 720; letter-spacing: -.5px; }
+.traffic-policy-metric.green strong { color: #2c7c68; }
+.traffic-policy-metric.amber strong { color: #a26c1d; }
+.traffic-policy-metric small { display: block; margin-top: 5px; color: #a0a8a2; font-size: 9px; }
+.traffic-policy-callout { display: flex; align-items: flex-start; gap: 11px; margin-bottom: 15px; padding: 14px 16px; border: 1px solid #cfdcf1; border-left: 3px solid #467bdb; background: #f7faff; }
+.traffic-policy-callout-icon { display: grid; place-items: center; flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: #eaf1ff; color: #3970cb; }
+.traffic-policy-callout strong { display: block; color: #29456f; font-size: 11px; font-weight: 700; }
+.traffic-policy-callout p { margin: 4px 0 0; color: #687990; font-size: 10px; line-height: 1.55; }
+.traffic-policy-callout button { margin-left: auto; padding: 0; align-self: center; border: 0; background: transparent; color: #2f69c9; font-size: 10px; cursor: pointer; white-space: nowrap; }
+.traffic-policy-panel { border: 1px solid var(--line); background: #fff; box-shadow: 0 7px 20px rgb(33 48 66 / 2%); }
+.traffic-policy-panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 20px 21px 15px; border-bottom: 1px solid #edf0ed; }
+.traffic-policy-panel-head h3 { margin: 0; color: #23344b; font-size: 14px; font-weight: 720; }
+.traffic-policy-panel-head p { margin: 5px 0 0; color: #9aa29e; font-size: 10px; line-height: 1.5; }
+.traffic-policy-filters { display: flex; align-items: center; gap: 7px; }
+.traffic-policy-filters select, .traffic-policy-search input { height: 32px; border: 1px solid #dce2e9; border-radius: 4px; background: #fff; color: #536176; font-size: 10px; }
+.traffic-policy-filters select { padding: 0 9px; }
+.traffic-policy-search input { width: 185px; padding: 0 10px; }
+.traffic-policy-filters select:focus, .traffic-policy-search input:focus, .traffic-policy-form-field input:focus, .traffic-policy-form-field select:focus, .traffic-policy-form-field textarea:focus { outline: 2px solid rgb(24 59 122 / 22%); outline-offset: 1px; border-color: #8eaad0; }
+.traffic-policy-table-wrap { width: 100%; overflow-x: auto; }
+.traffic-policy-table { width: 100%; min-width: 1000px; border-collapse: collapse; table-layout: fixed; }
+.traffic-policy-table th, .traffic-policy-table td { padding: 0 13px; border-bottom: 1px solid #edf0ed; text-align: left; vertical-align: middle; }
+.traffic-policy-table th { height: 38px; color: #929b96; font-size: 9px; font-weight: 700; white-space: nowrap; }
+.traffic-policy-table td { height: 69px; color: #5d6872; font-size: 10px; }
+.traffic-policy-table tbody tr:hover { background: #fbfcfe; }
+.traffic-policy-table th:nth-child(1), .traffic-policy-table td:nth-child(1) { width: 19%; }
+.traffic-policy-table th:nth-child(2), .traffic-policy-table td:nth-child(2) { width: 17%; }
+.traffic-policy-table th:nth-child(3), .traffic-policy-table td:nth-child(3) { width: 13%; }
+.traffic-policy-table th:nth-child(4), .traffic-policy-table td:nth-child(4) { width: 14%; }
+.traffic-policy-table th:nth-child(5), .traffic-policy-table td:nth-child(5) { width: 11%; }
+.traffic-policy-table th:nth-child(6), .traffic-policy-table td:nth-child(6) { width: 12%; }
+.traffic-policy-table td strong { display: block; color: #43536a; font-size: 10px; font-weight: 680; }
+.traffic-policy-table td small { display: block; margin-top: 4px; overflow: hidden; color: #9da6aa; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.traffic-policy-overview-title-row { display: flex; align-items: center; gap: 14px; }
+.traffic-policy-view-switch { display: inline-flex; align-items: center; gap: 2px; padding: 2px; border: 1px solid #dce3e9; border-radius: 5px; background: #f8fafc; }
+.traffic-policy-view-switch button { min-height: 24px; padding: 0 9px; border: 0; border-radius: 3px; background: transparent; color: #8b969e; font-size: 9px; cursor: pointer; }
+.traffic-policy-view-switch button.active { background: #fff; color: #2f69c9; box-shadow: 0 1px 4px rgb(31 60 91 / 10%); font-weight: 700; }
+.traffic-policy-clickable-row { cursor: pointer; }
+.traffic-policy-clickable-row:hover { background: #f8fbff !important; }
+.traffic-policy-pin-table, .traffic-policy-model-table { min-width: 1050px; }
+.traffic-policy-pin-table th:nth-child(1), .traffic-policy-pin-table td:nth-child(1) { width: 17%; }
+.traffic-policy-pin-table th:nth-child(2), .traffic-policy-pin-table td:nth-child(2) { width: 25%; }
+.traffic-policy-pin-table th:nth-child(3), .traffic-policy-pin-table td:nth-child(3) { width: 13%; }
+.traffic-policy-pin-table th:nth-child(4), .traffic-policy-pin-table td:nth-child(4) { width: 11%; }
+.traffic-policy-pin-table th:nth-child(5), .traffic-policy-pin-table td:nth-child(5) { width: 12%; }
+.traffic-policy-pin-table th:nth-child(6), .traffic-policy-pin-table td:nth-child(6) { width: 12%; }
+.traffic-policy-model-table th:nth-child(1), .traffic-policy-model-table td:nth-child(1) { width: 18%; }
+.traffic-policy-model-table th:nth-child(2), .traffic-policy-model-table td:nth-child(2) { width: 13%; }
+.traffic-policy-model-table th:nth-child(3), .traffic-policy-model-table td:nth-child(3) { width: 15%; }
+.traffic-policy-model-table th:nth-child(4), .traffic-policy-model-table td:nth-child(4) { width: 14%; }
+.traffic-policy-model-table th:nth-child(5), .traffic-policy-model-table td:nth-child(5) { width: 12%; }
+.traffic-policy-model-table th:nth-child(6), .traffic-policy-model-table td:nth-child(6) { width: 12%; }
+.traffic-policy-model-table th:nth-child(7), .traffic-policy-model-table td:nth-child(7) { width: 11%; }
+.traffic-policy-coverage { display: flex; flex-direction: column; gap: 6px; width: 78px; }
+.traffic-policy-coverage span { display: block; width: 100%; height: 5px; overflow: hidden; border-radius: 4px; background: #e8edf1; }
+.traffic-policy-coverage i { display: block; height: 100%; border-radius: inherit; background: #4a8a76; }
+.traffic-policy-risk, .traffic-policy-ok { display: inline-flex; align-items: center; gap: 4px; font-size: 9px; font-weight: 650; }
+.traffic-policy-risk { color: #ad6d27; }
+.traffic-policy-ok { color: #38816b; }
+.traffic-policy-row-warning { color: #ae6f36 !important; }
+.traffic-policy-muted-value { color: #b0b9b5; font-size: 12px; }
+.traffic-policy-text-action { width: auto !important; padding: 0 6px !important; color: #2f69c9 !important; font-size: 9px !important; }
+.traffic-policy-scope-readonly { display: flex; flex-direction: column; justify-content: center; min-height: 35px; padding: 0 10px; border: 1px solid #dce2df; border-radius: 4px; background: #f8faf9; }
+.traffic-policy-scope-readonly strong { color: #465d78; font-size: 11px; }
+.traffic-policy-scope-readonly small { margin-top: 3px; color: #9ca7a2; font-size: 8px; }
+.traffic-policy-empty-inline { align-self: center; color: #a3aca7; font-size: 9px; }
+.traffic-policy-row-title { display: block; max-width: 100%; padding: 0; overflow: hidden; border: 0; background: transparent; color: #275aa6; font-size: 11px; font-weight: 700; text-align: left; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; }
+.traffic-policy-row-title:hover { color: #173f79; text-decoration: underline; }
+.traffic-policy-preset-label { color: #4b6489; font-size: 10px; font-weight: 670; }
+.traffic-policy-status { display: inline-flex; align-items: center; min-height: 22px; padding: 0 8px; border-radius: 11px; font-size: 9px; font-weight: 700; white-space: nowrap; }
+.traffic-policy-status.success { background: #edf8f3; color: #2b806a; }
+.traffic-policy-status.warning { background: #fff7e8; color: #a06b1c; }
+.traffic-policy-status.blue { background: #edf4ff; color: #2e68be; }
+.traffic-policy-status.neutral { background: #f1f3f3; color: #727c7a; }
+.traffic-policy-status.muted { background: #f5f6f5; color: #a0a7a3; }
+.traffic-policy-row-actions { display: inline-flex; align-items: center; justify-content: flex-end; gap: 2px; }
+.traffic-policy-row-actions button, .traffic-policy-icon-link { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 4px; background: transparent; color: #84909b; cursor: pointer; }
+.traffic-policy-row-actions button:hover, .traffic-policy-icon-link:hover { background: #edf3fc; color: #2f69c9; }
+.traffic-policy-empty { padding: 50px 20px; color: #9ba5a0; font-size: 11px; text-align: center; }
+.traffic-policy-toast { position: fixed; z-index: 20; right: 24px; bottom: 24px; display: inline-flex; align-items: center; gap: 8px; max-width: min(420px, calc(100vw - 32px)); padding: 12px 15px; border: 1px solid #b9dfd0; border-radius: 5px; background: #f4fbf7; box-shadow: 0 11px 28px rgb(31 71 58 / 14%); color: #236c59; font-size: 11px; }
+.traffic-policy-editor-head, .traffic-policy-detail-head, .traffic-policy-simulation-head { align-items: flex-start; }
+.traffic-policy-stepper { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 16px; border: 1px solid var(--line); background: #fff; }
+.traffic-policy-stepper button { position: relative; min-height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-right: 1px solid #edf0ed; background: #fff; color: #909995; font-size: 10px; font-weight: 650; cursor: pointer; }
+.traffic-policy-stepper button:last-child { border-right: 0; }
+.traffic-policy-stepper button span { display: grid; place-items: center; width: 20px; height: 20px; border: 1px solid #d1d8d3; border-radius: 50%; color: #9da5a0; font-size: 9px; }
+.traffic-policy-stepper button.active { color: var(--navy); background: #f6f9ff; }
+.traffic-policy-stepper button.active::after { content: ""; position: absolute; right: -1px; bottom: -1px; left: -1px; height: 2px; background: var(--navy); }
+.traffic-policy-stepper button.active span { border-color: var(--navy); background: var(--navy); color: #fff; }
+.traffic-policy-stepper button.done { color: #327765; }
+.traffic-policy-stepper button.done span { border-color: #57a88d; color: #327765; }
+.traffic-policy-editor-layout { display: grid; grid-template-columns: minmax(0, 1fr) 302px; align-items: start; gap: 15px; }
+.traffic-policy-editor-panel { min-width: 0; padding-bottom: 0; }
+.traffic-policy-section-title { display: flex; align-items: flex-start; gap: 10px; padding: 20px 21px 15px; border-bottom: 1px solid #edf0ed; }
+.traffic-policy-section-icon { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 5px; background: #edf4ff; color: #2f69c9; }
+.traffic-policy-section-title h3 { margin: 1px 0 4px; color: #23344b; font-size: 14px; font-weight: 720; }
+.traffic-policy-section-title p { margin: 0; color: #929c99; font-size: 10px; line-height: 1.5; }
+.traffic-policy-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 17px; padding: 21px; }
+.traffic-policy-form-field { min-width: 0; }
+.traffic-policy-form-field.full { grid-column: 1 / -1; }
+.traffic-policy-field-label { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+.traffic-policy-field-label label { color: #4c5966; font-size: 10px; font-weight: 700; }
+.traffic-policy-field-label span { color: #a1aaa5; font-size: 9px; text-align: right; }
+.traffic-policy-form-field > input:not([type="checkbox"]), .traffic-policy-form-field > select, .traffic-policy-form-field > textarea { width: 100%; border: 1px solid #dce2df; border-radius: 4px; background: #fff; color: #4d5b68; font-size: 11px; }
+.traffic-policy-form-field > input:not([type="checkbox"]), .traffic-policy-form-field > select { height: 35px; padding: 0 10px; }
+.traffic-policy-form-field > textarea { padding: 10px; resize: vertical; line-height: 1.5; }
+.traffic-policy-field-help { display: block; margin-top: 7px; color: #9aa39f; font-size: 9px; line-height: 1.5; }
+.traffic-policy-check-list { display: grid; gap: 7px; min-height: 35px; padding: 8px 10px; border: 1px solid #dce2df; border-radius: 4px; }
+.traffic-policy-check-list.compact { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.traffic-policy-check-row, .traffic-policy-provider-option label { display: inline-flex; align-items: center; gap: 7px; color: #66716e; font-size: 10px; cursor: pointer; }
+.traffic-policy-check-row input, .traffic-policy-provider-option input { accent-color: var(--navy); }
+.traffic-policy-choice-grid { display: grid; gap: 9px; }
+.traffic-policy-choice-grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.traffic-policy-choice-grid.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.traffic-policy-choice-grid button { min-height: 74px; display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 12px; border: 1px solid #dde3df; border-radius: 5px; background: #fff; color: #526068; text-align: left; cursor: pointer; }
+.traffic-policy-choice-grid button:hover { border-color: #9eb6d7; }
+.traffic-policy-choice-grid button.selected { border-color: #4878c9; background: #f5f8ff; box-shadow: inset 0 0 0 1px #4878c9; }
+.traffic-policy-choice-grid button strong { color: #334b6e; font-size: 11px; }
+.traffic-policy-choice-grid button span { color: #8e9996; font-size: 9px; line-height: 1.4; }
+.traffic-policy-choice-grid button small { color: #8795a7; font-size: 9px; }
+.traffic-policy-readonly-quota { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)) 1.2fr; gap: 1px; margin: 21px 21px 0; border: 1px solid #e3e8e4; background: #e3e8e4; }
+.traffic-policy-readonly-quota > div { min-height: 79px; display: flex; flex-direction: column; justify-content: center; gap: 5px; padding: 0 13px; background: #fafcfa; }
+.traffic-policy-readonly-quota span { color: #929b97; font-size: 9px; }
+.traffic-policy-readonly-quota strong { color: #38536f; font-size: 15px; font-weight: 720; }
+.traffic-policy-quota-editor { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; margin: 21px 21px 0; border: 1px solid #e3e8e4; background: #e3e8e4; }
+.traffic-policy-quota-editor > label { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 79px; padding: 12px 13px; background: #fafcfa; }
+.traffic-policy-quota-editor > label > div:first-child { display: flex; flex-direction: column; gap: 5px; }
+.traffic-policy-quota-editor strong { color: #53616b; font-size: 10px; }
+.traffic-policy-quota-editor span { color: #929b97; font-size: 9px; }
+.traffic-policy-quota-input { display: flex; align-items: center; gap: 6px; }
+.traffic-policy-quota-input input { width: 125px; height: 35px; padding: 0 9px; border: 1px solid #8eaad0; border-radius: 4px; background: #f8fbff; color: #2d5fa9; font-size: 15px; font-weight: 720; text-align: right; }
+.traffic-policy-quota-input input:focus { outline: 2px solid rgb(24 59 122 / 18%); outline-offset: 1px; }
+.traffic-policy-quota-input em { color: #536d91; font-size: 9px; font-style: normal; font-weight: 700; }
+.traffic-policy-readonly-source button { display: inline-flex; align-items: center; gap: 5px; width: max-content; padding: 0; border: 0; background: transparent; color: #2f69c9; font-size: 9px; cursor: pointer; }
+.traffic-policy-switch-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 13px 14px; border: 1px solid #e0e6e1; background: #fbfdfb; }
+.traffic-policy-switch-row .traffic-policy-field-label { margin-bottom: 3px; justify-content: flex-start; }
+.traffic-policy-switch-row p { margin: 0; color: #909a95; font-size: 9px; line-height: 1.4; }
+.traffic-policy-switch { position: relative; flex: 0 0 auto; width: 37px; height: 21px; padding: 0; border: 0; border-radius: 12px; background: #c9d0cc; cursor: pointer; transition: background 150ms ease; }
+.traffic-policy-switch span { position: absolute; top: 3px; left: 3px; width: 15px; height: 15px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / 20%); transition: transform 150ms ease; }
+.traffic-policy-switch.on { background: #3d8b78; }
+.traffic-policy-switch.on span { transform: translateX(16px); }
+.traffic-policy-segmented { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+.traffic-policy-multiplier-options { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.traffic-policy-segmented button { height: 35px; border: 1px solid #dce2df; border-radius: 4px; background: #fff; color: #7d8882; font-size: 11px; cursor: pointer; }
+.traffic-policy-segmented button.selected { border-color: #4878c9; background: #f5f8ff; color: #2d5fa9; font-weight: 700; }
+.traffic-policy-segmented button:disabled { color: #b9c0bc; background: #f6f7f6; cursor: not-allowed; }
+.traffic-policy-custom-multiplier { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+.traffic-policy-custom-multiplier input { width: 100px; height: 32px; padding: 0 9px; border: 1px solid #8eaad0; border-radius: 4px; background: #f8fbff; color: #2d5fa9; font-size: 11px; font-weight: 700; }
+.traffic-policy-custom-multiplier span { color: #536d91; font-size: 11px; font-weight: 700; }
+.traffic-policy-custom-multiplier small { color: #929c99; font-size: 9px; }
+.traffic-policy-rule-note { display: flex; align-items: flex-start; gap: 8px; margin: 0 21px 20px; padding: 11px 12px; border: 1px solid #e6e7db; background: #fcfbf1; color: #816b2a; font-size: 9px; line-height: 1.6; }
+.traffic-policy-rule-note svg { flex: 0 0 auto; margin-top: 1px; }
+.traffic-policy-subsection { margin: 0 21px 22px; padding-top: 17px; border-top: 1px solid #edf0ed; }
+.traffic-policy-subsection h4 { margin: 0; color: #4b5961; font-size: 11px; font-weight: 700; }
+.traffic-policy-subsection > p { margin: 5px 0 12px; color: #99a29d; font-size: 9px; }
+.traffic-policy-subsection-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; color: #809099; }
+.traffic-policy-subsection-head p { margin: 5px 0 0; color: #99a29d; font-size: 9px; line-height: 1.5; }
+.traffic-policy-weight-editor { margin-top: 12px; padding: 13px; border: 1px solid #dfe6e2; border-radius: 5px; background: #fbfdfc; }
+.traffic-policy-weight-editor-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 12px; }
+.traffic-policy-weight-editor-head > div:first-child { display: flex; flex-direction: column; gap: 4px; }
+.traffic-policy-weight-editor-head strong { color: #42556a; font-size: 10px; }
+.traffic-policy-weight-editor-head span { color: #909b96; font-size: 9px; line-height: 1.45; }
+.traffic-policy-weight-total { display: flex; align-items: center; gap: 7px; min-width: 86px; padding: 7px 9px; border: 1px solid #d5e4dd; border-radius: 4px; background: #fff; }
+.traffic-policy-weight-total strong { margin-left: auto; color: #2f806b; }
+.traffic-policy-weight-total.invalid { border-color: #ead3ce; background: #fff9f8; }
+.traffic-policy-weight-total.invalid strong { color: #b45847; }
+.traffic-policy-weight-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; }
+.traffic-policy-weight-field { display: flex; flex-direction: column; gap: 7px; padding: 10px; border: 1px solid #e3e8e5; border-radius: 4px; background: #fff; }
+.traffic-policy-weight-field > span { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: #52616d; font-size: 9px; font-weight: 700; }
+.traffic-policy-weight-field small { color: #a1aaa5; font-size: 8px; font-weight: 500; }
+.traffic-policy-weight-field > div { display: flex; align-items: center; gap: 5px; }
+.traffic-policy-weight-field input { width: 100%; min-width: 0; height: 31px; padding: 0 7px; border: 1px solid #dce2df; border-radius: 4px; color: #2d5fa9; font-size: 11px; font-weight: 700; text-align: right; }
+.traffic-policy-weight-field em { color: #8f9994; font-size: 9px; font-style: normal; }
+.traffic-policy-weight-field input:focus { outline: 2px solid rgb(24 59 122 / 18%); outline-offset: 1px; border-color: #8eaad0; }
+.traffic-policy-weight-editor-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
+.traffic-policy-weight-editor-foot span { color: #8d9893; font-size: 8px; }
+.traffic-policy-weight-editor-foot button { flex: 0 0 auto; padding: 0; border: 0; background: transparent; color: #2f69c9; font-size: 9px; cursor: pointer; }
+.traffic-policy-form-grid-embedded { padding: 0; }
+.traffic-policy-hard-constraints { padding-bottom: 2px; }
+.traffic-policy-provider-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.traffic-policy-provider-option { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 9px; min-height: 54px; padding: 8px 10px; border: 1px solid #e0e6e2; background: #fbfdfb; }
+.traffic-policy-provider-option strong, .traffic-policy-preference-row strong { display: block; color: #4b5b62; font-size: 10px; }
+.traffic-policy-provider-option small, .traffic-policy-preference-row small { display: block; margin-top: 3px; color: #9ba49f; font-size: 9px; }
+.traffic-policy-provider-option label.disabled { color: #b3bcb8; cursor: not-allowed; }
+.traffic-policy-provider-option input:disabled { opacity: .45; cursor: not-allowed; }
+.traffic-policy-preference-table { border: 1px solid #e2e7e3; }
+.traffic-policy-preference-row { display: grid; grid-template-columns: minmax(0, 1fr) 150px 90px; align-items: center; gap: 14px; min-height: 57px; padding: 8px 11px; border-bottom: 1px solid #edf0ed; }
+.traffic-policy-preference-row:last-child { border-bottom: 0; }
+.traffic-policy-preference-row select { height: 29px; padding: 0 7px; border: 1px solid #dce2df; border-radius: 4px; background: #fff; color: #596975; font-size: 10px; }
+.traffic-policy-ep-actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+.traffic-policy-ep-actions label { display: inline-flex; align-items: center; gap: 5px; color: #66716e; font-size: 9px; cursor: pointer; white-space: nowrap; }
+.traffic-policy-ep-actions label.disabled { color: #b3bcb8; cursor: not-allowed; }
+.traffic-policy-ep-actions input:disabled { opacity: .45; cursor: not-allowed; }
+.traffic-policy-ep-actions input { accent-color: var(--navy); }
+.traffic-policy-preference-input { display: flex; align-items: center; justify-content: flex-end; gap: 3px; }
+.traffic-policy-preference-input input { width: 58px; height: 30px; padding: 0 7px; border: 1px solid #dce2df; border-radius: 4px; background: #fff; color: #2d5fa9; font-size: 11px; font-weight: 700; text-align: right; }
+.traffic-policy-preference-input input:focus { outline: 2px solid rgb(24 59 122 / 18%); outline-offset: 1px; border-color: #8eaad0; }
+.traffic-policy-preference-input em { color: #9aa39f; font-size: 9px; font-style: normal; }
+.traffic-policy-ep-filter-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; padding: 10px 11px; border: 1px solid #e1e7e3; background: #fbfdfb; }
+.traffic-policy-ep-filter-summary { display: flex; align-items: baseline; gap: 8px; white-space: nowrap; }
+.traffic-policy-ep-filter-summary strong { color: #52616d; font-size: 10px; }
+.traffic-policy-ep-filter-summary span { color: #97a19c; font-size: 9px; }
+.traffic-policy-ep-filter-controls { display: flex; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 6px; }
+.traffic-policy-ep-filter-controls input, .traffic-policy-ep-filter-controls select { height: 30px; border: 1px solid #dce2df; border-radius: 4px; background: #fff; color: #596975; font-size: 9px; }
+.traffic-policy-ep-filter-controls input { width: 155px; padding: 0 8px; }
+.traffic-policy-ep-filter-controls select { min-width: 82px; padding: 0 6px; }
+.traffic-policy-ep-filter-controls input:focus, .traffic-policy-ep-filter-controls select:focus { outline: 2px solid rgb(24 59 122 / 18%); outline-offset: 1px; border-color: #8eaad0; }
+.traffic-policy-ep-filter-clear { height: 30px; padding: 0 7px; border: 0; background: transparent; color: #2f69c9; font-size: 9px; cursor: pointer; }
+.traffic-policy-ep-filter-clear:disabled { color: #b1b9b5; cursor: not-allowed; }
+.traffic-policy-ep-filter-empty { padding: 28px 12px; color: #9ba49f; font-size: 9px; text-align: center; }
+.traffic-policy-endpoint-mode { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 21px 12px; padding: 11px 12px; border: 1px solid #e4e9e5; background: #fbfdfb; }
+.traffic-policy-endpoint-mode strong { display: block; color: #4b5b62; font-size: 10px; }
+.traffic-policy-endpoint-mode small { display: block; margin-top: 3px; color: #9aa5a0; font-size: 8px; line-height: 1.4; }
+.traffic-policy-endpoint-mode-options { min-width: 270px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.traffic-policy-endpoint-mode-options button { min-height: 29px; height: 31px; }
+.traffic-policy-ep-mode-muted { color: #9aa49f; font-size: 9px; }
+.traffic-policy-summary { position: sticky; top: 112px; border: 1px solid #d9e0e8; background: #f9fbfd; }
+.traffic-policy-summary-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 18px 17px 13px; border-bottom: 1px solid #e4eaf0; color: #2f69c9; }
+.traffic-policy-summary-kicker { color: #7f9bc3; font-size: 9px; letter-spacing: .08em; }
+.traffic-policy-summary-head h3 { margin: 5px 0 0; color: #2c476b; font-size: 13px; }
+.traffic-policy-summary-copy { margin: 0; padding: 15px 17px; color: #637386; font-size: 10px; line-height: 1.7; }
+.traffic-policy-summary-list { display: grid; gap: 0; margin: 0 17px; border-top: 1px solid #e5ebf0; }
+.traffic-policy-summary-list > div { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 37px; border-bottom: 1px solid #e5ebf0; }
+.traffic-policy-summary-list span { color: #9ca7b1; font-size: 9px; }
+.traffic-policy-summary-list strong { color: #4b5f78; font-size: 10px; }
+.traffic-policy-summary-note { display: flex; align-items: flex-start; gap: 6px; margin: 15px 17px 17px; color: #7e8fa0; font-size: 9px; line-height: 1.55; }
+.traffic-policy-summary-note svg { flex: 0 0 auto; margin-top: 1px; color: #5b8ed2; }
+.traffic-policy-editor-footer { display: flex; align-items: center; justify-content: space-between; min-height: 60px; padding: 0 21px; border-top: 1px solid #edf0ed; }
+.traffic-policy-editor-footer > span { color: #a0a9a4; font-size: 9px; }
+.traffic-policy-fallback-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 11px; padding: 21px; }
+.traffic-policy-fallback-card { min-height: 160px; padding: 14px; border: 1px solid #dce8e0; background: #fbfefc; }
+.traffic-policy-fallback-card.locked { border-color: #eed9d5; background: #fffaf9; }
+.traffic-policy-fallback-card-head { display: flex; align-items: center; gap: 7px; color: #2d7c68; font-size: 11px; }
+.traffic-policy-fallback-card.locked .traffic-policy-fallback-card-head { color: #ae5644; }
+.traffic-policy-fallback-card p { margin: 14px 0 0; color: #87928d; font-size: 9px; line-height: 1.5; }
+.traffic-policy-fallback-card ul { display: grid; gap: 8px; margin: 14px 0 0; padding-left: 15px; color: #71807a; font-size: 9px; line-height: 1.45; }
+.traffic-policy-fallback-card li::marker { color: #6da58e; }
+.traffic-policy-fallback-card.locked li::marker { color: #d27c6a; }
+.traffic-policy-release-summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; padding: 21px 21px 16px; }
+.traffic-policy-release-summary > div { min-height: 58px; display: flex; flex-direction: column; justify-content: center; gap: 5px; padding: 0 11px; border: 1px solid #e3e8e4; background: #fbfdfb; }
+.traffic-policy-release-summary span { color: #99a39e; font-size: 9px; }
+.traffic-policy-release-summary strong { overflow: hidden; color: #4b5e72; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.traffic-policy-issue-list { display: grid; gap: 7px; padding: 0 21px 18px; }
+.traffic-policy-issue { display: flex; align-items: flex-start; gap: 7px; padding: 9px 10px; border: 1px solid #ecd8d3; background: #fff9f8; color: #a65344; font-size: 9px; line-height: 1.5; }
+.traffic-policy-issue.warning { border-color: #eadfbd; background: #fffdf4; color: #956d23; }
+.traffic-policy-issue.success { border-color: #cfe6dc; background: #f5fcf8; color: #2d7a67; }
+.traffic-policy-issue svg { flex: 0 0 auto; margin-top: 1px; }
+.traffic-policy-release-actions { display: flex; justify-content: flex-end; gap: 8px; padding: 0 21px 21px; }
+.traffic-policy-detail-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 15px; margin-bottom: 15px; }
+.traffic-policy-detail-card { min-width: 0; }
+.traffic-policy-detail-hero { display: grid; grid-template-columns: auto 1fr auto 1fr; align-items: baseline; gap: 6px 10px; padding: 19px 21px; border-bottom: 1px solid #edf0ed; }
+.traffic-policy-detail-hero strong, .traffic-policy-detail-hero b { color: #2b65b6; font-size: 17px; }
+.traffic-policy-detail-hero span { color: #9ba59f; font-size: 9px; }
+.traffic-policy-definition-list { display: grid; gap: 0; margin: 0; padding: 0 21px; }
+.traffic-policy-definition-list > div { display: grid; grid-template-columns: 75px minmax(0, 1fr); gap: 15px; min-height: 47px; align-items: center; border-bottom: 1px solid #edf0ed; }
+.traffic-policy-definition-list dt { color: #99a29d; font-size: 9px; }
+.traffic-policy-definition-list dd { margin: 0; color: #53646f; font-size: 10px; }
+.traffic-policy-definition-list dd button { display: inline-flex; align-items: center; gap: 3px; padding: 0; border: 0; background: transparent; color: #2d69bf; font-size: 9px; cursor: pointer; }
+.traffic-policy-detail-number { padding: 20px 21px 11px; }
+.traffic-policy-detail-number strong { display: block; color: #2c66ba; font-size: 29px; font-weight: 720; }
+.traffic-policy-detail-number span { display: block; margin-top: 3px; color: #929d9a; font-size: 9px; }
+.traffic-policy-detail-number small { display: block; margin-top: 8px; color: #61806f; font-size: 9px; }
+.traffic-policy-mini-bars { display: grid; gap: 10px; padding: 9px 21px 14px; }
+.traffic-policy-mini-bars > div > div { display: flex; align-items: center; justify-content: space-between; color: #64716f; font-size: 9px; }
+.traffic-policy-mini-bars b { color: #3d6caa; font-size: 10px; }
+.traffic-policy-bar { display: block; height: 5px; margin-top: 5px; overflow: hidden; border-radius: 3px; background: #e9eef1; }
+.traffic-policy-bar i { display: block; height: 100%; border-radius: inherit; background: #5689d4; }
+.traffic-policy-link-button { display: inline-flex; align-items: center; gap: 6px; margin: 0 21px 20px; padding: 0; border: 0; background: transparent; color: #2d69bf; font-size: 10px; cursor: pointer; }
+.traffic-policy-endpoint-list { padding: 0 21px 7px; }
+.traffic-policy-endpoint-row { display: grid; grid-template-columns: minmax(180px, 1fr) 52px 95px 105px auto; align-items: center; gap: 10px; min-height: 56px; border-bottom: 1px solid #edf0ed; }
+.traffic-policy-endpoint-main { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.traffic-policy-endpoint-main > div { min-width: 0; }
+.traffic-policy-endpoint-main strong { display: block; overflow: hidden; color: #4a5c66; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.traffic-policy-endpoint-main small { display: block; margin-top: 3px; overflow: hidden; color: #9ba59f; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.traffic-policy-health-dot { width: 7px; height: 7px; flex: 0 0 auto; border-radius: 50%; background: #4c9a7c; box-shadow: 0 0 0 3px rgb(76 154 124 / 10%); }
+.traffic-policy-health-dot.warning { background: #bf8a2c; box-shadow: 0 0 0 3px rgb(191 138 44 / 11%); }
+.traffic-policy-health-dot.degraded { background: #b34b36; box-shadow: 0 0 0 3px rgb(179 75 54 / 11%); }
+.traffic-policy-preference { display: inline-flex; align-items: center; justify-content: center; min-width: 37px; height: 21px; padding: 0 6px; border-radius: 11px; font-size: 9px; font-weight: 700; }
+.traffic-policy-preference.preferred { background: #edf4ff; color: #2d6abd; }
+.traffic-policy-preference.allowed { background: #f0f4f2; color: #668078; }
+.traffic-policy-preference.disabled { background: #f8efed; color: #aa6557; }
+.traffic-policy-preference-value { display: inline-flex; align-items: center; justify-content: center; min-width: 42px; height: 21px; padding: 0 7px; border-radius: 11px; background: #edf4ff; color: #2d6abd; font-size: 9px; font-weight: 700; }
+.traffic-policy-preference-score { display: grid; gap: 3px; }
+.traffic-policy-preference-score strong { color: #49698f; font-size: 10px; }
+.traffic-policy-preference-score small { color: #9aa6b0; font-size: 8px; white-space: nowrap; }
+.traffic-policy-endpoint-metric { color: #788582; font-size: 9px; white-space: nowrap; }
+.traffic-policy-endpoint-row > button { display: inline-flex; align-items: center; gap: 4px; padding: 0; border: 0; background: transparent; color: #2d69bf; font-size: 9px; cursor: pointer; white-space: nowrap; }
+.traffic-policy-scenario-panel, .traffic-policy-score-panel, .traffic-policy-history-panel { margin-bottom: 15px; }
+.traffic-policy-pressure-value { color: #2d69bf; font-size: 12px; font-weight: 700; }
+.traffic-policy-scenario-buttons { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; padding: 18px 21px 11px; }
+.traffic-policy-scenario-buttons button { min-height: 46px; display: flex; align-items: center; justify-content: space-between; padding: 0 11px; border: 1px solid #dfe5e2; border-radius: 4px; background: #fff; color: #6f7c79; font-size: 10px; cursor: pointer; }
+.traffic-policy-scenario-buttons button b { color: #9aa5a0; font-size: 10px; }
+.traffic-policy-scenario-buttons button.selected { border-color: #4b7bca; background: #f5f8ff; color: #2d5ea9; box-shadow: inset 0 0 0 1px #4b7bca; }
+.traffic-policy-scenario-buttons button.selected b { color: #2d69bf; }
+.traffic-policy-range { display: block; width: calc(100% - 42px); margin: 5px 21px 17px; accent-color: #416fba; }
+.traffic-policy-simulation-metrics { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin: 0 21px 17px; border: 1px solid #e4e9e5; background: #e4e9e5; gap: 1px; }
+.traffic-policy-simulation-metrics > div { min-height: 67px; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 0 10px; background: #fbfdfb; }
+.traffic-policy-simulation-metrics span { color: #9aa39f; font-size: 9px; }
+.traffic-policy-simulation-metrics strong { color: #3d5872; font-size: 13px; }
+.traffic-policy-simulation-metrics .traffic-policy-admission { background: #f5fbf7; }
+.traffic-policy-simulation-metrics .traffic-policy-admission strong { color: #2f806b; }
+.traffic-policy-simulation-metrics .traffic-policy-admission.warn { background: #fffaf1; }
+.traffic-policy-simulation-metrics .traffic-policy-admission.warn strong { color: #9b6c21; }
+.traffic-policy-score-legend { display: flex; align-items: center; gap: 11px; color: #929c96; font-size: 9px; }
+.traffic-policy-score-legend span { display: inline-flex; align-items: center; gap: 4px; }
+.traffic-policy-score-legend i { width: 6px; height: 6px; border-radius: 50%; background: #4d9a7c; }
+.traffic-policy-score-legend i.fail { background: #c47060; }
+.traffic-policy-score-table { min-width: 1030px; }
+.traffic-policy-score-table th:nth-child(1), .traffic-policy-score-table td:nth-child(1) { width: 17%; }
+.traffic-policy-score-table th:nth-child(2), .traffic-policy-score-table td:nth-child(2) { width: 19%; }
+.traffic-policy-score-table th:nth-child(3), .traffic-policy-score-table td:nth-child(3) { width: 8%; }
+.traffic-policy-score-table th:nth-child(4), .traffic-policy-score-table td:nth-child(4), .traffic-policy-score-table th:nth-child(5), .traffic-policy-score-table td:nth-child(5), .traffic-policy-score-table th:nth-child(6), .traffic-policy-score-table td:nth-child(6), .traffic-policy-score-table th:nth-child(7), .traffic-policy-score-table td:nth-child(7) { width: 6%; }
+.traffic-policy-score-table th:nth-child(8), .traffic-policy-score-table td:nth-child(8) { width: 9%; }
+.traffic-policy-score-table th:nth-child(9), .traffic-policy-score-table td:nth-child(9) { width: 9%; }
+.traffic-policy-filter-pass, .traffic-policy-filter-fail { display: inline-flex; align-items: flex-start; gap: 5px; font-size: 9px; line-height: 1.4; }
+.traffic-policy-filter-pass { color: #2f806b; }
+.traffic-policy-filter-fail { color: #ae5b4a; }
+.traffic-policy-filter-fail span { max-width: 130px; }
+.traffic-policy-probability { color: #2d69bf !important; }
+.traffic-policy-score-table .muted { color: #a3aca8; }
+.traffic-policy-simulation-footnote { display: flex; align-items: center; gap: 6px; padding: 12px 21px 16px; color: #8e9995; font-size: 9px; }
+.traffic-policy-history-list { padding: 4px 21px 12px; }
+.traffic-policy-history-row { display: grid; grid-template-columns: 58px minmax(0, 1fr) auto; align-items: center; gap: 16px; min-height: 87px; border-bottom: 1px solid #edf0ed; }
+.traffic-policy-history-version { color: #3c6fbf; font-size: 15px; font-weight: 720; }
+.traffic-policy-history-version span { display: block; margin-top: 4px; color: #2c806b; font-size: 8px; font-weight: 650; }
+.traffic-policy-history-main { min-width: 0; }
+.traffic-policy-history-main strong { display: block; overflow: hidden; color: #4a5b67; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.traffic-policy-history-main small { display: block; margin-top: 4px; color: #9aa39f; font-size: 9px; }
+.traffic-policy-history-main p { margin: 5px 0 0; color: #7d8984; font-size: 9px; }
+.traffic-policy-loading { padding: 80px; color: #919b96; text-align: center; }
+
+@media (max-width: 1100px) {
+  .traffic-policy-main { padding-inline: 25px; }
+  .traffic-policy-editor-layout { grid-template-columns: 1fr; }
+  .traffic-policy-summary { position: static; }
+  .traffic-policy-simulation-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 850px) {
+  .traffic-policy-page-head { align-items: flex-start; flex-direction: column; }
+  .traffic-policy-page-actions { justify-content: flex-start; }
+  .traffic-policy-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .traffic-policy-panel-head { align-items: flex-start; flex-direction: column; }
+  .traffic-policy-overview-title-row { width: 100%; justify-content: space-between; }
+  .traffic-policy-filters { width: 100%; flex-wrap: wrap; }
+  .traffic-policy-search { flex: 1 1 180px; }
+  .traffic-policy-search input { width: 100%; }
+  .traffic-policy-fallback-grid, .traffic-policy-choice-grid.three, .traffic-policy-choice-grid.four { grid-template-columns: 1fr; }
+  .traffic-policy-weight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .traffic-policy-ep-filter-toolbar { align-items: flex-start; flex-direction: column; }
+  .traffic-policy-ep-filter-controls { justify-content: flex-start; }
+  .traffic-policy-endpoint-mode { align-items: flex-start; flex-direction: column; }
+  .traffic-policy-endpoint-mode-options { width: 100%; min-width: 0; }
+  .traffic-policy-readonly-quota { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .traffic-policy-readonly-source { grid-column: 1 / -1; min-height: 56px !important; }
+  .traffic-policy-detail-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .traffic-policy-main { padding: 22px 15px 48px; }
+  .traffic-policy-page-head h2 { font-size: 30px; }
+  .traffic-policy-page-actions { width: 100%; }
+  .traffic-policy-freshness { width: 100%; }
+  .traffic-policy-metrics { grid-template-columns: 1fr; }
+  .traffic-policy-callout { align-items: flex-start; flex-wrap: wrap; }
+  .traffic-policy-callout button { margin-left: 37px; }
+  .traffic-policy-stepper { overflow-x: auto; }
+  .traffic-policy-stepper button { min-width: 128px; }
+  .traffic-policy-form-grid, .traffic-policy-release-summary { grid-template-columns: 1fr; }
+  .traffic-policy-quota-editor { grid-template-columns: 1fr; margin-inline: 15px; }
+  .traffic-policy-provider-grid { grid-template-columns: 1fr; }
+  .traffic-policy-weight-grid { grid-template-columns: 1fr; }
+  .traffic-policy-weight-editor-head, .traffic-policy-weight-editor-foot { align-items: flex-start; flex-direction: column; }
+  .traffic-policy-check-list.compact { grid-template-columns: 1fr; }
+  .traffic-policy-readonly-quota { grid-template-columns: 1fr; margin-inline: 15px; }
+  .traffic-policy-readonly-source { grid-column: auto; }
+  .traffic-policy-section-title, .traffic-policy-form-grid, .traffic-policy-panel-head { padding-inline: 15px; }
+  .traffic-policy-subsection, .traffic-policy-fallback-grid, .traffic-policy-release-actions, .traffic-policy-issue-list, .traffic-policy-editor-footer { margin-inline: 0; padding-inline: 15px; }
+  .traffic-policy-rule-note { margin-inline: 15px; }
+  .traffic-policy-endpoint-mode { margin-inline: 15px; }
+  .traffic-policy-scenario-buttons { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-inline: 15px; }
+  .traffic-policy-range { width: calc(100% - 30px); margin-inline: 15px; }
+  .traffic-policy-simulation-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-inline: 15px; }
+  .traffic-policy-endpoint-list { padding-inline: 15px; }
+  .traffic-policy-endpoint-row, .traffic-policy-preference-row { grid-template-columns: minmax(0, 1fr) auto; gap: 6px; padding: 9px 0; }
+  .traffic-policy-ep-actions { grid-column: 2; grid-row: 1; }
+  .traffic-policy-preference-row .traffic-policy-preference-input { grid-column: 2; grid-row: 2; }
+  .traffic-policy-endpoint-metric { display: none; }
+  .traffic-policy-endpoint-row > button { grid-column: 2; grid-row: 1; }
+  .traffic-policy-history-row { grid-template-columns: 50px minmax(0, 1fr); gap: 10px; padding: 12px 0; }
+  .traffic-policy-history-row > button { grid-column: 2; justify-self: start; }
+  .traffic-policy-detail-hero { grid-template-columns: auto 1fr; }
+  .traffic-policy-detail-hero b { grid-column: 1; }
+  .traffic-policy-detail-hero b + span { grid-column: 2; }
+}
+
+/* Route strategy visual refresh. These rules intentionally stay under the
+   route page namespace so the other console modules keep their existing UI. */
+.traffic-policy-page {
+  --route-ink: #16181b;
+  --route-body: #34383e;
+  --route-muted: #737a83;
+  --route-subtle: #a0a6ad;
+  --route-border: #dfe2e6;
+  --route-border-strong: #d5d9df;
+  --route-blue: #1258b4;
+  --route-blue-soft: #f2f6fc;
+  --route-green: #11824f;
+  --route-red: #ef2d2d;
+  --route-bg: #f7f8fa;
+  min-height: calc(100vh - 92px);
+  background: var(--route-bg);
+  color: var(--route-body);
+  font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+.traffic-policy-main {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 42px 46px 76px;
+  background: var(--route-bg);
+}
+
+.traffic-policy-page-head {
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 30px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--route-border-strong);
+}
+
+.traffic-policy-page-head h2 {
+  margin: 8px 0 7px;
+  color: var(--route-ink);
+  font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  font-size: clamp(30px, 3vw, 38px);
+  font-weight: 760;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+}
+
+.traffic-policy-page-head p {
+  color: var(--route-muted);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.traffic-policy-breadcrumb {
+  color: #8b9199;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+
+.traffic-policy-page-actions { gap: 11px; }
+.traffic-policy-freshness {
+  min-height: 38px;
+  color: #737a83;
+  font-size: 12px;
+}
+.traffic-policy-freshness-dot { width: 7px; height: 7px; }
+
+.traffic-policy-button {
+  min-height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 650;
+}
+.traffic-policy-button.primary {
+  border-color: var(--route-blue);
+  background: var(--route-blue);
+  box-shadow: none;
+}
+.traffic-policy-button.primary:hover:not(:disabled) { background: #0e4d9f; }
+.traffic-policy-button.secondary {
+  border-color: var(--route-border-strong);
+  background: #fff;
+  color: var(--route-ink);
+}
+.traffic-policy-button.secondary:hover:not(:disabled) {
+  border-color: #aab5c2;
+  color: var(--route-blue);
+}
+.traffic-policy-button.ghost { min-height: 38px; }
+.traffic-policy-back-link {
+  color: var(--route-muted);
+  font-size: 12px;
+}
+.traffic-policy-back-link:hover { color: var(--route-blue); }
+
+.traffic-policy-metrics {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+.traffic-policy-metric {
+  min-height: 132px;
+  padding: 21px 22px 18px;
+  border: 1px solid var(--route-border-strong);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: none;
+}
+.traffic-policy-metric-top {
+  justify-content: flex-start;
+  color: var(--route-muted);
+  font-size: 13px;
+}
+.traffic-policy-metric-icon { display: none; }
+.traffic-policy-metric strong {
+  margin-top: 19px;
+  color: var(--route-ink);
+  font-size: 29px;
+  font-weight: 760;
+  letter-spacing: -0.035em;
+}
+.traffic-policy-metric.green strong,
+.traffic-policy-metric.amber strong,
+.traffic-policy-metric.red strong { color: var(--route-ink); }
+.traffic-policy-metric small {
+  margin-top: 8px;
+  color: var(--route-subtle);
+  font-size: 11px;
+}
+
+.traffic-policy-callout {
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 18px;
+  padding: 17px 20px;
+  border: 1px solid #d3e0f2;
+  border-left: 3px solid var(--route-blue);
+  border-radius: 10px;
+  background: #fbfdff;
+}
+.traffic-policy-callout-icon {
+  width: 30px;
+  height: 30px;
+  background: #eff5ff;
+  color: var(--route-blue);
+}
+.traffic-policy-callout strong { color: #263b57; font-size: 13px; }
+.traffic-policy-callout p { color: #6f7d8d; font-size: 11px; }
+.traffic-policy-callout button { font-size: 11px; }
+
+.traffic-policy-panel {
+  border: 1px solid var(--route-border-strong);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: none;
+}
+.traffic-policy-panel-head {
+  align-items: center;
+  min-height: 82px;
+  padding: 20px 23px;
+  border-bottom: 1px solid var(--route-border);
+}
+.traffic-policy-panel-head h3 {
+  color: var(--route-ink);
+  font-size: 16px;
+  font-weight: 720;
+}
+.traffic-policy-panel-head p {
+  margin-top: 6px;
+  color: var(--route-muted);
+  font-size: 11px;
+}
+.traffic-policy-filters { gap: 9px; }
+.traffic-policy-filters select,
+.traffic-policy-search input {
+  height: 40px;
+  border: 1px solid var(--route-border-strong);
+  border-radius: 8px;
+  color: var(--route-body);
+  font-size: 12px;
+}
+.traffic-policy-search input {
+  width: 235px;
+  padding: 0 13px;
+}
+.traffic-policy-filters select:focus,
+.traffic-policy-search input:focus,
+.traffic-policy-form-field input:focus,
+.traffic-policy-form-field select:focus,
+.traffic-policy-form-field textarea:focus {
+  outline: 2px solid rgb(18 88 180 / 18%);
+  border-color: #91add3;
+}
+
+.traffic-policy-table-wrap { border-radius: 0 0 12px 12px; }
+.traffic-policy-table {
+  min-width: 1120px;
+  table-layout: auto;
+}
+.traffic-policy-table th,
+.traffic-policy-table td {
+  padding: 0 22px;
+  border-bottom: 1px solid #e9ebee;
+}
+.traffic-policy-table th {
+  height: 50px;
+  color: #777e87;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+.traffic-policy-table td {
+  height: 76px;
+  color: var(--route-body);
+  font-size: 12px;
+}
+.traffic-policy-table tbody tr { transition: background 120ms ease; }
+.traffic-policy-table tbody tr:hover { background: #fafcff; }
+.traffic-policy-table tbody tr:last-child td { border-bottom: 0; }
+.traffic-policy-table td strong {
+  color: var(--route-ink);
+  font-size: 13px;
+  font-weight: 680;
+}
+.traffic-policy-table td small {
+  margin-top: 5px;
+  color: var(--route-subtle);
+  font-size: 11px;
+}
+.traffic-policy-pin-table th:nth-child(1), .traffic-policy-pin-table td:nth-child(1) { min-width: 180px; }
+.traffic-policy-pin-table th:nth-child(2), .traffic-policy-pin-table td:nth-child(2) { min-width: 220px; }
+.traffic-policy-pin-table th:nth-child(3), .traffic-policy-pin-table td:nth-child(3) { min-width: 120px; }
+.traffic-policy-pin-table th:nth-child(4), .traffic-policy-pin-table td:nth-child(4) { min-width: 120px; }
+.traffic-policy-pin-table th:nth-child(5), .traffic-policy-pin-table td:nth-child(5) { min-width: 120px; }
+.traffic-policy-pin-table th:nth-child(6), .traffic-policy-pin-table td:nth-child(6) { min-width: 120px; }
+.traffic-policy-pin-table th:nth-child(7), .traffic-policy-pin-table td:nth-child(7) { min-width: 165px; }
+.traffic-policy-pin-table th:nth-child(8), .traffic-policy-pin-table td:nth-child(8) { min-width: 145px; }
+.traffic-policy-link-button,
+.traffic-policy-text-action {
+  margin: 0;
+  color: var(--route-blue);
+  font-size: 12px;
+  font-weight: 620;
+}
+.traffic-policy-link-button:hover,
+.traffic-policy-text-action:hover { color: #0d4288; }
+.traffic-policy-coverage strong { color: var(--route-blue) !important; }
+.traffic-policy-coverage > span { height: 5px; margin-top: 7px; background: #e8edf3; }
+.traffic-policy-coverage > span i { background: var(--route-blue); }
+.traffic-policy-risk { color: var(--route-red); font-size: 12px; }
+.traffic-policy-ok { color: var(--route-green); font-size: 12px; }
+.traffic-policy-row-warning { color: var(--route-red) !important; }
+.traffic-policy-empty { padding: 60px 20px; color: var(--route-muted); font-size: 13px; }
+
+/* PIN → model screens use the same table language as the overview. */
+.traffic-policy-pin-head { margin-bottom: 25px; }
+.traffic-policy-pin-head h2 { margin-top: 12px; }
+.traffic-policy-pin-head .traffic-policy-back-link { margin-bottom: 2px; }
+.traffic-policy-model-table { min-width: 1080px; }
+.traffic-policy-model-table td { height: 72px; }
+.traffic-policy-model-table .traffic-policy-row-actions { gap: 10px; }
+.traffic-policy-model-table .traffic-policy-row-actions button {
+  color: var(--route-blue);
+  border-color: var(--route-border-strong);
+  border-radius: 7px;
+  background: #fff;
+}
+.traffic-policy-model-table .traffic-policy-row-actions button:hover {
+  border-color: #9db6d8;
+  background: var(--route-blue-soft);
+}
+.traffic-policy-status { border-radius: 999px; font-size: 11px; }
+
+/* Editor/detail/simulation panels inherit the airy screenshot proportions. */
+.traffic-policy-stepper {
+  border: 1px solid var(--route-border-strong);
+  border-radius: 12px;
+  background: #fff;
+}
+.traffic-policy-stepper button { min-height: 64px; color: var(--route-muted); font-size: 12px; }
+.traffic-policy-stepper button.active { color: var(--route-blue); background: var(--route-blue-soft); }
+.traffic-policy-editor-layout { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.traffic-policy-detail-grid { grid-template-columns: minmax(0, 1fr); }
+.traffic-policy-editor-panel,
+.traffic-policy-summary,
+.traffic-policy-detail-card,
+.traffic-policy-scenario-panel,
+.traffic-policy-score-panel,
+.traffic-policy-history-panel {
+  border-radius: 12px;
+  box-shadow: none;
+}
+.traffic-policy-summary { background: #fff; }
+.traffic-policy-form-field label,
+.traffic-policy-form-field > label { color: var(--route-ink); }
+.traffic-policy-form-field input,
+.traffic-policy-form-field select,
+.traffic-policy-form-field textarea,
+.traffic-policy-quota-input input,
+.traffic-policy-preference-input input {
+  border-color: var(--route-border-strong);
+  border-radius: 8px;
+  color: var(--route-body);
+}
+.traffic-policy-quota-editor,
+.traffic-policy-readonly-quota,
+.traffic-policy-readonly-source,
+.traffic-policy-subsection,
+.traffic-policy-endpoint-mode,
+.traffic-policy-ep-filter-toolbar,
+.traffic-policy-rule-note,
+.traffic-policy-release-summary > div,
+.traffic-policy-fallback-card,
+.traffic-policy-issue {
+  border-radius: 9px;
+}
+.traffic-policy-subsection-head h4 { color: var(--route-ink); font-size: 15px; }
+.traffic-policy-subsection-head p,
+.traffic-policy-field-help,
+.traffic-policy-form-field > span { color: var(--route-muted); }
+.traffic-policy-preference-input input { color: var(--route-blue); font-size: 12px; }
+.traffic-policy-editor-footer { min-height: 70px; }
+.traffic-policy-detail-number strong { color: var(--route-blue); }
+.traffic-policy-toast { border-radius: 9px; }
+
+@media (max-width: 1200px) {
+  .traffic-policy-main { padding-inline: 30px; }
+  .traffic-policy-metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 850px) {
+  .traffic-policy-main { padding: 30px 22px 56px; }
+  .traffic-policy-page-head { align-items: flex-start; }
+  .traffic-policy-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .traffic-policy-panel-head { align-items: flex-start; }
+  .traffic-policy-search input { width: 100%; }
+}
+
+@media (max-width: 620px) {
+  .traffic-policy-main { padding: 24px 15px 46px; }
+  .traffic-policy-page-head { margin-bottom: 21px; padding-bottom: 20px; }
+  .traffic-policy-page-head h2 { font-size: 30px; }
+  .traffic-policy-metrics { grid-template-columns: 1fr; gap: 11px; }
+  .traffic-policy-metric { min-height: 112px; }
+  .traffic-policy-panel-head { padding: 17px 16px; }
+}
+
+/* Strategy-management surface. Keep all additions scoped so other console modules are untouched. */
+.traffic-policy-page .traffic-policy-page-head h1 {
+  margin: 8px 0 7px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 3vw, 39px);
+  font-weight: 700;
+  letter-spacing: -1.4px;
+  line-height: 1.05;
+}
+.traffic-policy-page .traffic-policy-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--route-blue, #2f69c9);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.traffic-policy-page .traffic-policy-management-panel { overflow: hidden; }
+.traffic-policy-page .traffic-policy-management-panel .traffic-policy-panel-head h2,
+.traffic-policy-page .traffic-policy-detail-card .traffic-policy-panel-head h2,
+.traffic-policy-page .traffic-policy-config-panel .traffic-policy-panel-head h2,
+.traffic-policy-page .traffic-policy-history-panel .traffic-policy-panel-head h2 { margin: 0; color: #23344b; font-size: 16px; font-weight: 760; }
+.traffic-policy-page .traffic-policy-management-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 21px;
+  border-bottom: 1px solid #edf0ed;
+  background: #fbfcfe;
+}
+.traffic-policy-page .traffic-policy-management-toolbar select {
+  height: 32px;
+  min-width: 112px;
+  padding: 0 10px;
+  border: 1px solid #dce2e9;
+  border-radius: 4px;
+  background: #fff;
+  color: #536176;
+  font-size: 10px;
+}
+.traffic-policy-page .traffic-policy-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 250px;
+  color: #86919d;
+}
+.traffic-policy-page .traffic-policy-search input { width: 250px; }
+.traffic-policy-page .traffic-policy-filter-note { margin-left: auto; color: #8c969f; font-size: 10px; }
+.traffic-policy-page .traffic-policy-management-table { min-width: 980px; }
+.traffic-policy-page .traffic-policy-management-table th,
+.traffic-policy-page .traffic-policy-management-table td { white-space: nowrap; }
+.traffic-policy-page .traffic-policy-management-table th:last-child,
+.traffic-policy-page .traffic-policy-management-table td:last-child { width: 170px; min-width: 170px; }
+.traffic-policy-page .traffic-policy-management-table td:first-child { min-width: 230px; }
+.traffic-policy-page .traffic-policy-table-sub {
+  display: block;
+  margin-top: 5px;
+  color: #99a29d;
+  font-size: 10px;
+}
+.traffic-policy-page .traffic-policy-row-link {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--route-blue, #2f69c9);
+  font-size: 12px;
+  font-weight: 680;
+  text-align: left;
+  cursor: pointer;
+}
+.traffic-policy-page .traffic-policy-row-link:hover { color: #0d4288; }
+.traffic-policy-page .traffic-policy-row-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  min-width: 145px;
+}
+.traffic-policy-page .traffic-policy-row-actions .traffic-policy-text-button,
+.traffic-policy-page .traffic-policy-text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--route-blue, #2f69c9);
+  font-size: 11px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.traffic-policy-page .traffic-policy-text-button:hover { color: #0d4288; }
+.traffic-policy-page .traffic-policy-text-button.danger { color: #b44b4b; }
+.traffic-policy-page .traffic-policy-row-actions .traffic-policy-row-primary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid #cfdae7;
+  border-radius: 6px;
+  background: #fff;
+  color: #31526f;
+  font-size: 11px;
+  font-weight: 680;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.traffic-policy-page .traffic-policy-row-actions .traffic-policy-row-primary-action:hover,
+.traffic-policy-page .traffic-policy-row-actions .traffic-policy-row-primary-action:hover {
+  border-color: #80a8df;
+  background: #f1f6fd;
+  color: var(--route-blue, #2f69c9);
+}
+.traffic-policy-page .traffic-policy-row-actions .traffic-policy-row-primary-action:disabled {
+  border-color: #e1e6eb;
+  background: #f7f8f9;
+  color: #a2abb3;
+  cursor: not-allowed;
+  opacity: 1;
+}
+.traffic-policy-page .traffic-policy-model-multiselect { position: relative; width: 100%; }
+.traffic-policy-page .traffic-policy-model-multiselect-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-height: 35px;
+  padding: 5px 10px;
+  border: 1px solid #dce2df;
+  border-radius: 4px;
+  background: #fff;
+  color: #4d5b68;
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+}
+.traffic-policy-page .traffic-policy-model-multiselect-trigger:hover,
+.traffic-policy-page .traffic-policy-model-multiselect-trigger[aria-expanded="true"] { border-color: #8eaad0; box-shadow: 0 0 0 2px rgb(24 59 122 / 12%); }
+.traffic-policy-page .traffic-policy-model-tags { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; min-width: 0; }
+.traffic-policy-page .traffic-policy-model-tag { padding: 3px 7px; border-radius: 999px; background: #eef4ff; color: #315c9b; line-height: 1.2; white-space: nowrap; }
+.traffic-policy-page .traffic-policy-model-placeholder { color: #98a19e; }
+.traffic-policy-page .traffic-policy-model-chevron { flex: 0 0 auto; color: #6f7c86; font-size: 15px; line-height: 1; }
+.traffic-policy-page .traffic-policy-model-multiselect-menu {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 5px);
+  right: 0;
+  left: 0;
+  padding: 5px;
+  border: 1px solid #d6dee8;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 10px 24px rgb(31 55 78 / 16%);
+}
+.traffic-policy-page .traffic-policy-model-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 34px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #344b61;
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+}
+.traffic-policy-page .traffic-policy-model-option:hover,
+.traffic-policy-page .traffic-policy-model-option.selected { background: #f2f6fb; color: #2f69c9; }
+.traffic-policy-page .traffic-policy-model-checkbox { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border: 1px solid #bcc8d4; border-radius: 3px; color: #fff; }
+.traffic-policy-page .traffic-policy-model-checkbox.checked { border-color: #2f69c9; background: #2f69c9; }
+.traffic-policy-page .traffic-policy-model-multiselect-menu p { margin: 5px 7px 3px; color: #8d989f; font-size: 10px; line-height: 1.4; }
+.traffic-policy-page .traffic-policy-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 8px;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+.traffic-policy-page .traffic-policy-status.success { color: #2b866d; background: #eff9f5; }
+.traffic-policy-page .traffic-policy-status.warning { color: #a66d16; background: #fff8e8; }
+.traffic-policy-page .traffic-policy-status.blue { color: #2f69c9; background: #eef4ff; }
+.traffic-policy-page .traffic-policy-status.neutral { color: #68788a; background: #f4f6f8; }
+.traffic-policy-page .traffic-policy-status.muted { color: #8d979f; background: #f6f6f6; }
+.traffic-policy-page .traffic-policy-version-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: #fff8e8;
+  color: #986b20;
+  font-size: 10px;
+  font-weight: 650;
+}
+.traffic-policy-page .traffic-policy-version-pill.neutral { background: #f2f5f8; color: #68788a; }
+.traffic-policy-page .traffic-policy-empty { color: #a1a8ae; }
+.traffic-policy-page .traffic-policy-empty-state {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  padding: 54px 20px;
+  color: #8c969f;
+  text-align: center;
+}
+.traffic-policy-page .traffic-policy-empty-state strong { color: #536176; font-size: 13px; }
+.traffic-policy-page .traffic-policy-empty-state p { margin: 0; font-size: 11px; }
+.traffic-policy-page .traffic-policy-back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #68788a;
+  font-size: 11px;
+  cursor: pointer;
+}
+.traffic-policy-page .traffic-policy-back-button:hover { color: var(--route-blue, #2f69c9); }
+.traffic-policy-page .traffic-policy-detail-head { align-items: center; }
+.traffic-policy-page .traffic-policy-detail-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; }
+.traffic-policy-page .traffic-policy-button.danger { border-color: #e2b7b7; background: #fff; color: #b44b4b; }
+.traffic-policy-page .traffic-policy-button.danger:hover { background: #fff5f5; }
+.traffic-policy-page .traffic-policy-detail-summary { margin-bottom: 15px; }
+.traffic-policy-page .traffic-policy-detail-summary .traffic-policy-definition-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); padding-bottom: 18px; }
+.traffic-policy-page .traffic-policy-detail-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 15px; margin-bottom: 15px; }
+.traffic-policy-page .traffic-policy-detail-card { min-width: 0; }
+.traffic-policy-page .traffic-policy-definition-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 20px;
+  margin: 0;
+  padding: 4px 21px 15px;
+}
+.traffic-policy-page .traffic-policy-definition { min-height: 52px; padding: 13px 0 9px; border-bottom: 1px solid #edf0ed; }
+.traffic-policy-page .traffic-policy-definition dt { display: flex; align-items: center; gap: 8px; color: #99a29d; font-size: 10px; }
+.traffic-policy-page .traffic-policy-definition dt small { color: #aeb7b2; font-size: 9px; }
+.traffic-policy-page .traffic-policy-definition dd { margin: 6px 0 0; color: #435261; font-size: 12px; line-height: 1.45; }
+.traffic-policy-page .traffic-policy-config-panel { margin-bottom: 15px; }
+.traffic-policy-page .traffic-policy-readonly-config { padding: 0 21px 20px; }
+.traffic-policy-page .traffic-policy-config-block { padding-top: 17px; }
+.traffic-policy-page .traffic-policy-config-block h4 { margin: 0 0 10px; color: #536176; font-size: 11px; font-weight: 720; }
+.traffic-policy-page .traffic-policy-weight-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.traffic-policy-page .traffic-policy-weight-grid span { display: flex; justify-content: space-between; padding: 9px 11px; border: 1px solid #e7ebef; border-radius: 7px; color: #7e8a94; font-size: 10px; }
+.traffic-policy-page .traffic-policy-weight-grid strong { color: var(--route-blue, #2f69c9); font-size: 12px; }
+.traffic-policy-page .traffic-policy-chip-list { display: flex; flex-wrap: wrap; gap: 7px; }
+.traffic-policy-page .traffic-policy-chip { display: inline-flex; align-items: center; gap: 5px; padding: 6px 9px; border: 1px solid #e1e8e4; border-radius: 999px; background: #f7fbf9; color: #537165; font-size: 10px; }
+.traffic-policy-page .traffic-policy-ep-summary { display: flex; flex-wrap: wrap; gap: 8px; }
+.traffic-policy-page .traffic-policy-ep-summary span { padding: 7px 10px; border-radius: 6px; background: #f3f6f8; color: #5f7080; font-size: 10px; }
+.traffic-policy-page .traffic-policy-handoff-card { display: flex; align-items: center; gap: 15px; padding: 17px 21px; border-color: #d8e4f4; background: #f7faff; }
+.traffic-policy-page .traffic-policy-handoff-card h3 { margin: 0; color: #2e4e78; font-size: 13px; }
+.traffic-policy-page .traffic-policy-handoff-card p { max-width: 760px; margin: 5px 0 0; color: #718198; font-size: 10px; line-height: 1.6; }
+.traffic-policy-page .traffic-policy-handoff-icon { display: grid; place-items: center; width: 35px; height: 35px; flex: 0 0 auto; border-radius: 9px; background: #e7f0fd; color: var(--route-blue, #2f69c9); }
+.traffic-policy-page .traffic-policy-handoff-card .traffic-policy-button { margin-left: auto; flex: 0 0 auto; }
+.traffic-policy-page .traffic-policy-history-list { padding: 4px 21px 12px; }
+.traffic-policy-page .traffic-policy-history-row { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 13px; min-height: 82px; padding: 15px 0; border-bottom: 1px solid #edf0ed; }
+.traffic-policy-page .traffic-policy-history-row:last-child { border-bottom: 0; }
+.traffic-policy-page .traffic-policy-history-marker { display: grid; place-items: center; width: 27px; height: 27px; border: 1px solid #cfe1d9; border-radius: 50%; background: #f3faf7; color: #2b866d; }
+.traffic-policy-page .traffic-policy-history-content { min-width: 0; }
+.traffic-policy-page .traffic-policy-history-title { display: flex; align-items: center; gap: 9px; }
+.traffic-policy-page .traffic-policy-history-title strong { color: #3c6fbf; font-size: 14px; }
+.traffic-policy-page .traffic-policy-history-title > span:last-child { color: #66727d; font-size: 11px; }
+.traffic-policy-page .traffic-policy-history-content p { margin: 7px 0 4px; color: #6e7b84; font-size: 11px; }
+.traffic-policy-page .traffic-policy-history-content small { color: #9aa39f; font-size: 10px; }
+.traffic-policy-page .traffic-policy-modal-backdrop { position: fixed; z-index: 50; inset: 0; display: grid; place-items: center; padding: 20px; background: rgb(18 29 44 / 36%); }
+.traffic-policy-page .traffic-policy-modal { width: min(100%, 520px); border: 1px solid #dce3eb; border-radius: 12px; background: #fff; box-shadow: 0 20px 60px rgb(18 29 44 / 22%); }
+.traffic-policy-page .traffic-policy-modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; padding: 21px 22px 10px; }
+.traffic-policy-page .traffic-policy-modal-head h2 { margin: 7px 0 0; color: #23344b; font-size: 19px; }
+.traffic-policy-page .traffic-policy-modal > p { margin: 0; padding: 0 22px 16px; color: #68788a; font-size: 11px; line-height: 1.6; }
+.traffic-policy-page .traffic-policy-icon-button { display: grid; place-items: center; width: 30px; height: 30px; border: 0; border-radius: 6px; background: #f3f6f9; color: #68788a; cursor: pointer; }
+.traffic-policy-page .traffic-policy-handoff-params { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; margin: 0; padding: 0 22px 14px; }
+.traffic-policy-page .traffic-policy-handoff-params .traffic-policy-definition { min-height: 48px; }
+.traffic-policy-page .traffic-policy-modal-note { display: flex; align-items: flex-start; gap: 7px; margin: 0 22px; padding: 10px 11px; border-radius: 7px; background: #f7faff; color: #6681a5; font-size: 10px; line-height: 1.5; }
+.traffic-policy-page .traffic-policy-modal-actions { display: flex; justify-content: flex-end; padding: 18px 22px 21px; }
+
+@media (max-width: 900px) {
+  .traffic-policy-page .traffic-policy-detail-grid { grid-template-columns: 1fr; }
+  .traffic-policy-page .traffic-policy-detail-summary .traffic-policy-definition-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .traffic-policy-page .traffic-policy-management-toolbar { flex-wrap: wrap; }
+  .traffic-policy-page .traffic-policy-filter-note { margin-left: 0; }
+}
+@media (max-width: 620px) {
+  .traffic-policy-page .traffic-policy-page-head { align-items: flex-start; flex-direction: column; }
+  .traffic-policy-page .traffic-policy-page-head h1 { font-size: 30px; }
+  .traffic-policy-page .traffic-policy-management-toolbar { align-items: stretch; flex-direction: column; }
+  .traffic-policy-page .traffic-policy-search,
+  .traffic-policy-page .traffic-policy-search input,
+  .traffic-policy-page .traffic-policy-management-toolbar select { width: 100%; }
+  .traffic-policy-page .traffic-policy-definition-grid,
+  .traffic-policy-page .traffic-policy-detail-summary .traffic-policy-definition-grid,
+  .traffic-policy-page .traffic-policy-handoff-params { grid-template-columns: 1fr; }
+  .traffic-policy-page .traffic-policy-weight-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .traffic-policy-page .traffic-policy-handoff-card { align-items: flex-start; flex-wrap: wrap; }
+  .traffic-policy-page .traffic-policy-handoff-card .traffic-policy-button { margin-left: 50px; }
+}
+
+/* In-module creation flow. Existing-policy updates remain external handoffs. */
+.traffic-policy-page .traffic-policy-stepper-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.traffic-policy-page .traffic-policy-editor-panel { overflow: hidden; border-radius: 12px; }
+.traffic-policy-page .traffic-policy-editor-subsection { margin: 0 21px; padding: 20px 0; border-bottom: 1px solid #edf0ed; }
+.traffic-policy-page .traffic-policy-editor-subsection:last-of-type { border-bottom: 0; }
+.traffic-policy-page .traffic-policy-editor-subsection > h4,
+.traffic-policy-page .traffic-policy-subsection-title h4 { margin: 0; color: #36495c; font-size: 12px; font-weight: 740; }
+.traffic-policy-page .traffic-policy-editor-subsection > p,
+.traffic-policy-page .traffic-policy-subsection-title p { margin: 5px 0 13px; color: #929d99; font-size: 10px; line-height: 1.55; }
+.traffic-policy-page .traffic-policy-editor-subsection .traffic-policy-quota-editor { margin: 13px 0 0; }
+.traffic-policy-page .traffic-policy-editor-subsection-first { padding-top: 16px; }
+.traffic-policy-page .traffic-policy-editor-warning { display: flex; align-items: flex-start; gap: 7px; padding: 10px 11px; border: 1px solid #ecd2cc; border-radius: 7px; background: #fff8f6; color: #a95140; font-size: 10px; line-height: 1.5; }
+.traffic-policy-page .traffic-policy-multiplier-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin-top: 12px; }
+.traffic-policy-page .traffic-policy-multiplier-row > div:first-child { display: grid; gap: 4px; }
+.traffic-policy-page .traffic-policy-multiplier-row strong { color: #53616b; font-size: 10px; }
+.traffic-policy-page .traffic-policy-multiplier-row span { color: #929b97; font-size: 9px; }
+.traffic-policy-page .traffic-policy-multiplier-options { display: grid; grid-template-columns: repeat(4, minmax(72px, 1fr)); gap: 7px; }
+.traffic-policy-page .traffic-policy-multiplier-options > button,
+.traffic-policy-page .traffic-policy-multiplier-options > label { min-height: 35px; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 0 9px; border: 1px solid #dce2df; border-radius: 5px; background: #fff; color: #77837e; font-size: 10px; cursor: pointer; }
+.traffic-policy-page .traffic-policy-multiplier-options .selected { border-color: #4878c9; background: #f5f8ff; color: #2d5fa9; font-weight: 700; }
+.traffic-policy-page .traffic-policy-multiplier-options input { width: 34px; height: 25px; padding: 0 3px; border: 0; border-bottom: 1px solid #9eb4d1; background: transparent; color: #2d5fa9; font-size: 10px; font-weight: 700; text-align: center; }
+.traffic-policy-page .traffic-policy-subsection-title { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.traffic-policy-page .traffic-policy-subsection-title > strong { padding: 6px 9px; border-radius: 999px; background: #f0f8f4; color: #2f806b; font-size: 10px; }
+.traffic-policy-page .traffic-policy-subsection-title > strong.invalid { background: #fff2ef; color: #ae5644; }
+.traffic-policy-page .traffic-policy-preset-grid { margin-bottom: 12px; }
+.traffic-policy-page .traffic-policy-embedded-grid { margin-top: 12px; padding: 0; }
+.traffic-policy-page .traffic-policy-ep-route-subsection { padding-bottom: 15px; }
+.traffic-policy-page .traffic-policy-endpoint-selection-empty { align-self: flex-start; color: #9ba49f; font-size: 10px; }
+.traffic-policy-page .traffic-policy-endpoint-mode-summary { display: flex; align-items: center; gap: 9px; min-height: 30px; margin-top: 11px; }
+.traffic-policy-page .traffic-policy-endpoint-mode-summary p { margin: 0; color: #909b96; font-size: 10px; line-height: 1.45; }
+.traffic-policy-page .traffic-policy-endpoint-mode-badge { display: inline-flex; align-items: center; flex: 0 0 auto; min-height: 23px; padding: 0 8px; border-radius: 999px; background: #f2f5f3; color: #6d7974; font-size: 10px; font-weight: 700; white-space: nowrap; }
+.traffic-policy-page .traffic-policy-endpoint-mode-badge.allow { background: #edf4ff; color: #2d5fa9; }
+.traffic-policy-page .traffic-policy-endpoint-mode-badge.deny { background: #fff4ed; color: #a46232; }
+.traffic-policy-page .traffic-policy-endpoint-card-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 11px; }
+.traffic-policy-page .traffic-policy-endpoint-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 58px; padding: 9px 11px; border: 1px solid #e1e7e3; border-radius: 7px; background: #fbfdfb; transition: border-color 120ms ease, background 120ms ease; }
+.traffic-policy-page .traffic-policy-endpoint-card.specified { border-color: #9bb9e7; background: #f5f8ff; }
+.traffic-policy-page .traffic-policy-endpoint-card.excluded { border-color: #e4b995; background: #fffaf6; }
+.traffic-policy-page .traffic-policy-endpoint-card-info { min-width: 0; }
+.traffic-policy-page .traffic-policy-endpoint-card strong,
+.traffic-policy-page .traffic-policy-preference-editor strong { display: block; color: #4b5b62; font-size: 10px; }
+.traffic-policy-page .traffic-policy-endpoint-card small,
+.traffic-policy-page .traffic-policy-preference-editor small { display: block; margin-top: 3px; color: #9ba49f; font-size: 9px; }
+.traffic-policy-page .traffic-policy-endpoint-card-actions { display: flex; align-items: center; gap: 11px; flex: 0 0 auto; }
+.traffic-policy-page .traffic-policy-endpoint-card-actions label { display: inline-flex; align-items: center; gap: 4px; color: #77837e; font-size: 10px; cursor: pointer; }
+.traffic-policy-page .traffic-policy-endpoint-card-actions label.selected { color: #2d5fa9; font-weight: 700; }
+.traffic-policy-page .traffic-policy-endpoint-card-actions label:last-child.selected { color: #a46232; }
+.traffic-policy-page .traffic-policy-endpoint-card-actions label:has(input:disabled) { color: #b7bfbb; cursor: not-allowed; }
+.traffic-policy-page .traffic-policy-endpoint-card-actions input { width: 14px; height: 14px; margin: 0; accent-color: var(--navy); }
+.traffic-policy-page .traffic-policy-endpoint-card-actions label:last-child input { accent-color: #a46232; }
+.traffic-policy-page .traffic-policy-preference-subsection { padding-bottom: 17px; }
+.traffic-policy-page .traffic-policy-endpoint-mode-hint { align-self: flex-start; color: #9ba49f; font-size: 10px; white-space: nowrap; }
+.traffic-policy-page .traffic-policy-preference-editor { border: 1px solid #e2e7e3; border-radius: 7px; overflow: hidden; }
+.traffic-policy-page .traffic-policy-preference-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 58px; padding: 8px 11px; border-bottom: 1px solid #edf0ed; transition: background-color 120ms ease; }
+.traffic-policy-page .traffic-policy-preference-row:last-child { border-bottom: 0; }
+.traffic-policy-page .traffic-policy-preference-row.specified { background: #f7faff; }
+.traffic-policy-page .traffic-policy-preference-row.excluded { background: #fffaf6; }
+.traffic-policy-page .traffic-policy-preference-row > span { min-width: 0; }
+.traffic-policy-page .traffic-policy-preference-controls { display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex: 0 0 auto; }
+.traffic-policy-page .traffic-policy-endpoint-inline-actions { display: flex; align-items: center; gap: 5px; }
+.traffic-policy-page .traffic-policy-endpoint-inline-button { min-width: 46px; height: 30px; padding: 0 8px; border: 1px solid #d8e0dd; border-radius: 5px; background: #fff; color: #77837e; font-size: 10px; cursor: pointer; transition: border-color 120ms ease, background-color 120ms ease, color 120ms ease; }
+.traffic-policy-page .traffic-policy-endpoint-inline-button:hover:not(:disabled) { border-color: #8eaad0; color: #2d5fa9; }
+.traffic-policy-page .traffic-policy-endpoint-inline-button:focus-visible { outline: 2px solid rgb(24 59 122 / 18%); outline-offset: 1px; }
+.traffic-policy-page .traffic-policy-endpoint-inline-button.allow.selected { border-color: #4878c9; background: #edf4ff; color: #2d5fa9; font-weight: 700; }
+.traffic-policy-page .traffic-policy-endpoint-inline-button.deny.selected { border-color: #d2a06e; background: #fff4ed; color: #a46232; font-weight: 700; }
+.traffic-policy-page .traffic-policy-endpoint-inline-button:disabled { border-color: #e6eae8; background: #f6f8f7; color: #b5bdb9; cursor: not-allowed; }
+.traffic-policy-page .traffic-policy-preference-editor input { width: 62px; height: 31px; padding: 0 7px; border: 1px solid #dce2df; border-radius: 4px; color: #2d5fa9; font-size: 11px; font-weight: 700; text-align: right; }
+.traffic-policy-page .traffic-policy-preference-editor em { color: #9aa39f; font-size: 9px; font-style: normal; }
+.traffic-policy-page .traffic-policy-endpoint-filter-toolbar { display: flex; align-items: center; gap: 8px; margin: 11px 0 9px; }
+.traffic-policy-page .traffic-policy-endpoint-search { display: flex; align-items: center; gap: 7px; flex: 1 1 320px; min-width: 0; height: 32px; padding: 0 9px; border: 1px solid #dce2df; border-radius: 6px; background: #fff; color: #89958f; }
+.traffic-policy-page .traffic-policy-endpoint-search:focus-within { border-color: #8eaad0; outline: 2px solid rgb(24 59 122 / 12%); outline-offset: 1px; }
+.traffic-policy-page .traffic-policy-endpoint-search input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: #4b5b62; font-size: 10px; }
+.traffic-policy-page .traffic-policy-endpoint-filter-toolbar > select { min-width: 96px; height: 32px; padding: 0 8px; border: 1px solid #dce2df; border-radius: 6px; background: #fff; color: #596975; font-size: 10px; }
+.traffic-policy-page .traffic-policy-endpoint-filter-count { flex: 0 0 auto; color: #9ba49f; font-size: 10px; white-space: nowrap; }
+.traffic-policy-page .traffic-policy-endpoint-filter-clear { display: inline-flex; align-items: center; gap: 3px; flex: 0 0 auto; padding: 0; border: 0; background: transparent; color: #2d69bf; font-size: 10px; cursor: pointer; white-space: nowrap; }
+.traffic-policy-page .traffic-policy-endpoint-filter-empty { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 90px; border: 1px dashed #dce3df; border-radius: 7px; color: #9ba49f; font-size: 10px; }
+.traffic-policy-page .traffic-policy-endpoint-filter-empty button { padding: 0; border: 0; background: transparent; color: #2d69bf; font-size: 10px; cursor: pointer; }
+
+@media (max-width: 760px) {
+  .traffic-policy-page .traffic-policy-multiplier-row { align-items: flex-start; flex-direction: column; }
+  .traffic-policy-page .traffic-policy-multiplier-options { width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .traffic-policy-page .traffic-policy-endpoint-card-list { grid-template-columns: 1fr; }
+  .traffic-policy-page .traffic-policy-endpoint-mode-summary { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .traffic-policy-page .traffic-policy-editor-subsection { margin-inline: 15px; }
+  .traffic-policy-page .traffic-policy-preference-row { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .traffic-policy-page .traffic-policy-preference-controls { width: 100%; justify-content: flex-end; }
+  .traffic-policy-page .traffic-policy-endpoint-filter-toolbar { align-items: stretch; flex-wrap: wrap; }
+  .traffic-policy-page .traffic-policy-endpoint-search { flex-basis: 100%; }
+  .traffic-policy-page .traffic-policy-endpoint-filter-count { margin-left: auto; }
+}
+
+/* Final pass: keep the strategy surface balanced at the console's medium width,
+   make the table state obvious, and give the editor a more forgiving keyboard flow. */
+.traffic-policy-page .traffic-policy-table-strategy {
+  display: block;
+  min-width: 0;
+}
+.traffic-policy-page .traffic-policy-clickable-row { cursor: pointer; }
+.traffic-policy-page .traffic-policy-clickable-row:focus-visible {
+  outline: 2px solid var(--route-blue, #2f69c9);
+  outline-offset: -2px;
+  background: #f7faff;
+}
+.traffic-policy-page .traffic-policy-clear-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 0 7px;
+  border: 0;
+  background: transparent;
+  color: var(--route-blue, #2f69c9);
+  font-size: 10px;
+  cursor: pointer;
+}
+.traffic-policy-page .traffic-policy-clear-filter:hover { color: #0d4288; }
+.traffic-policy-page .traffic-policy-stepper button:focus-visible,
+.traffic-policy-page .traffic-policy-model-multiselect-trigger:focus-visible,
+.traffic-policy-page .traffic-policy-model-option:focus-visible,
+.traffic-policy-page .traffic-policy-clear-filter:focus-visible {
+  outline: 2px solid var(--route-blue, #2f69c9);
+  outline-offset: -2px;
+}
+.traffic-policy-page .traffic-policy-detail-summary .traffic-policy-definition:last-child { grid-column: 1 / -1; }
+.traffic-policy-page .traffic-policy-release-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+@media (max-width: 1200px) {
+  .traffic-policy-page .traffic-policy-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .traffic-policy-page .traffic-policy-management-table { min-width: 760px; }
+  .traffic-policy-page .traffic-policy-management-table td:first-child { min-width: 185px; }
+  .traffic-policy-page .traffic-policy-management-table th:last-child,
+  .traffic-policy-page .traffic-policy-management-table td:last-child { width: 150px; min-width: 150px; }
+}
+
+@media (max-width: 900px) {
+  .traffic-policy-page .traffic-policy-release-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 620px) {
+  .traffic-policy-page .traffic-policy-release-summary { grid-template-columns: 1fr; }
+  .traffic-policy-page .traffic-policy-detail-summary .traffic-policy-definition:last-child { grid-column: auto; }
+}
+
+/* Jing ME outreach module. Kept scoped to preserve the existing console modules. */
+.jingme-page { min-height: calc(100vh - 92px); padding-top: 31px; padding-bottom: 72px; }
+.jingme-page-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 22px; }
+.jingme-eyebrow { display: inline-flex; align-items: center; gap: 7px; color: #8c9490; font-size: 10px; letter-spacing: .04em; }
+.jingme-eyebrow svg { color: var(--navy); }
+.jingme-page-head h2 { margin: 9px 0 7px; color: var(--ink); font-family: "Songti SC", STSong, Georgia, serif; font-size: clamp(30px, 3vw, 42px); font-weight: 600; letter-spacing: -.06em; line-height: 1.05; }
+.jingme-page-head p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+.jingme-head-actions { display: flex; align-items: center; gap: 15px; }
+.jingme-head-status, .jingme-live-label { display: inline-flex; align-items: center; gap: 6px; color: #7d857f; font-size: 10px; white-space: nowrap; }
+.jingme-head-status i, .jingme-live-label i { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgb(38 118 109 / 11%); }
+.jingme-tabs { display: flex; align-items: center; gap: 23px; margin-bottom: 16px; border-bottom: 1px solid var(--line); }
+.jingme-tabs button { position: relative; display: inline-flex; align-items: center; gap: 7px; min-height: 39px; padding: 0 1px; border: 0; background: transparent; color: #8c9490; font-size: 11px; cursor: pointer; }
+.jingme-tabs button.active { color: var(--navy); font-weight: 700; }
+.jingme-tabs button.active::after { content: ""; position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; background: var(--navy); }
+.jingme-tabs button span { display: inline-flex; align-items: center; justify-content: center; min-width: 19px; height: 17px; padding: 0 5px; border-radius: 9px; background: #edf3fb; color: #4970a8; font-size: 9px; }
+.jingme-panel { border: 1px solid var(--line); background: #fff; box-shadow: 0 7px 20px rgb(33 48 66 / 2%); }
+.jingme-panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 19px 21px 15px; border-bottom: 1px solid #edf0ed; }
+.jingme-title-line { display: flex; align-items: baseline; gap: 14px; }
+.jingme-title-line h3 { margin: 0; color: #23344b; font-size: 14px; font-weight: 720; }
+.jingme-section-index { color: #a3aaa5; font-family: Georgia, serif; font-size: 9px; letter-spacing: .06em; }
+.jingme-panel-head p { margin: 5px 0 0; color: #929c98; font-size: 10px; line-height: 1.5; }
+.jingme-audience-count { display: grid; justify-items: end; gap: 4px; padding-top: 2px; }
+.jingme-audience-count strong { color: var(--navy); font-family: Georgia, serif; font-size: 25px; font-weight: 400; line-height: 1; }
+.jingme-audience-count span, .jingme-record-count { color: #98a19c; font-size: 9px; }
+.jingme-mode-tabs { display: flex; gap: 21px; min-height: 41px; padding: 0 21px; border-bottom: 1px solid #edf0ed; }
+.jingme-mode-tabs button { position: relative; display: inline-flex; align-items: center; gap: 6px; padding: 0; border: 0; background: transparent; color: #929b96; font-size: 10px; cursor: pointer; }
+.jingme-mode-tabs button.active { color: var(--navy); font-weight: 700; }
+.jingme-mode-tabs button.active::after { content: ""; position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; background: var(--navy); }
+.jingme-audience-toolbar, .jingme-record-toolbar { display: flex; align-items: center; gap: 8px; padding: 13px 21px 11px; }
+.jingme-search-field { display: flex; align-items: center; gap: 7px; width: min(100%, 330px); height: 34px; padding: 0 10px; border: 1px solid #dce2df; border-radius: 4px; background: #fff; color: #89958f; }
+.jingme-search-field:focus-within { border-color: #8eaad0; outline: 2px solid rgb(24 59 122 / 12%); outline-offset: 1px; }
+.jingme-search-field input { min-width: 0; width: 100%; border: 0; outline: 0; background: transparent; color: #4d5b68; font-size: 10px; }
+.jingme-toolbar-hint { margin-left: auto; color: #9ba49f; font-size: 9px; }
+.jingme-text-button { padding: 0; border: 0; background: transparent; color: #2f69c9; font-size: 10px; cursor: pointer; white-space: nowrap; }
+.jingme-text-button:hover { color: #183b7a; text-decoration: underline; }
+.jingme-filter-box { padding: 15px 21px 13px; border-bottom: 1px solid #edf0ed; background: #fbfdfb; }
+.jingme-filter-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)) auto; gap: 9px; align-items: end; }
+.jingme-filter-grid label { display: grid; gap: 6px; min-width: 0; }
+.jingme-filter-grid label > span { color: #7e8983; font-size: 9px; }
+.jingme-filter-grid select, .jingme-record-toolbar select { width: 100%; height: 34px; padding: 0 9px; border: 1px solid #dce2df; border-radius: 4px; background: #fff; color: #536176; font-size: 10px; }
+.jingme-filter-actions { display: flex; align-items: center; gap: 5px; height: 34px; }
+.jingme-filter-note { display: flex; align-items: center; gap: 6px; margin: 11px 0 0; color: #8e9994; font-size: 9px; }
+.jingme-filter-box { padding: 0; border-bottom: 1px solid #edf0ed; background: #fff; }
+.jingme-filter-summary { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 21px; }
+.jingme-filter-toggle { display: inline-flex; align-items: center; gap: 6px; min-height: 29px; padding: 0 9px; border: 1px solid #d8e1ec; border-radius: 4px; background: #f8fbff; color: #49698f; font-size: 10px; font-weight: 650; cursor: pointer; }
+.jingme-filter-toggle:hover, .jingme-filter-toggle.open { border-color: #9eb6d7; background: #f1f6ff; color: var(--navy); }
+.jingme-filter-toggle svg:last-child { margin-left: 2px; color: #8294a9; transition: transform 140ms ease; }
+.jingme-filter-toggle.open svg:last-child { transform: rotate(180deg); }
+.jingme-filter-toggle > span { display: inline-flex; align-items: center; justify-content: center; min-width: 16px; height: 16px; padding: 0 4px; border-radius: 8px; background: #dfeafb; color: #2f69c9; font-size: 8px; }
+.jingme-filter-chips { display: flex; align-items: center; gap: 5px; min-width: 0; flex: 1; overflow-x: auto; scrollbar-width: none; }
+.jingme-filter-chips::-webkit-scrollbar { display: none; }
+.jingme-filter-chip { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto; min-height: 25px; padding: 0 7px 0 9px; border: 1px solid #dce6f2; border-radius: 13px; background: #f5f8fd; color: #5f7696; font-size: 9px; white-space: nowrap; }
+.jingme-filter-chip button { display: grid; place-items: center; width: 16px; height: 16px; padding: 0; border: 0; border-radius: 50%; background: transparent; color: #8093ab; cursor: pointer; }
+.jingme-filter-chip button:hover { background: #e3ecf8; color: #2f69c9; }
+.jingme-filter-empty-label { color: #a1aaa5; font-size: 9px; }
+.jingme-filter-result { flex: 0 0 auto; color: #929c98; font-size: 9px; white-space: nowrap; }
+.jingme-filter-result strong { color: #405977; font-size: 11px; }
+.jingme-filter-summary > .jingme-text-button { flex: 0 0 auto; }
+.jingme-filter-popover { padding: 14px 21px 13px; border-top: 1px solid #edf0ed; background: #fbfdfb; }
+.jingme-filter-popover .jingme-filter-note { margin-top: 10px; }
+.jingme-result-bar { display: flex; align-items: center; gap: 18px; min-height: 40px; padding: 0 21px; color: #939d98; font-size: 9px; }
+.jingme-result-bar strong { color: #405977; font-size: 11px; }
+.jingme-result-bar .jingme-text-button { margin-left: auto; }
+.jingme-user-table-wrap, .jingme-record-table-wrap { overflow-x: auto; }
+.jingme-user-table, .jingme-record-table { width: 100%; min-width: 800px; border-collapse: collapse; table-layout: fixed; }
+.jingme-user-table th, .jingme-user-table td, .jingme-record-table th, .jingme-record-table td { padding: 0 13px; border-top: 1px solid #edf0ed; text-align: left; vertical-align: middle; }
+.jingme-user-table th, .jingme-record-table th { height: 34px; color: #929b96; font-size: 9px; font-weight: 700; white-space: nowrap; }
+.jingme-user-table td { height: 56px; color: #5d6872; font-size: 10px; }
+.jingme-user-table th:first-child, .jingme-user-table td:first-child { width: 40px; padding-left: 21px; }
+.jingme-user-table th:nth-child(2), .jingme-user-table td:nth-child(2) { width: 18%; }
+.jingme-user-table th:nth-child(3), .jingme-user-table td:nth-child(3) { width: 16%; }
+.jingme-user-table th:nth-child(4), .jingme-user-table td:nth-child(4) { width: 16%; }
+.jingme-user-table th:nth-child(5), .jingme-user-table td:nth-child(5) { width: 14%; }
+.jingme-user-table th:nth-child(6), .jingme-user-table td:nth-child(6) { width: 11%; }
+.jingme-user-table tr.selected { background: #f8fbff; }
+.jingme-user-table tr:hover { background: #fbfcfe; }
+.jingme-user-table input, .jingme-confirm-check input { accent-color: var(--navy); }
+.jingme-user-table td strong, .jingme-record-table td > strong { display: block; color: #43536a; font-size: 10px; font-weight: 680; }
+.jingme-user-table td small, .jingme-record-table td small { display: block; margin-top: 4px; color: #9da6aa; font-size: 9px; }
+.jingme-user-table code { color: #667996; font-family: Georgia, serif; font-size: 10px; }
+.jingme-user-status, .jingme-status { display: inline-flex; align-items: center; gap: 5px; font-size: 9px; font-weight: 650; }
+.jingme-user-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #58a182; }
+.jingme-user-status.warning { color: #a06b1c; }
+.jingme-user-status.warning::before { background: #bf8a2c; }
+.jingme-user-status.muted { color: #9ba4a0; }
+.jingme-user-status.muted::before { background: #abb3ae; }
+.jingme-tag-list { display: flex; gap: 4px; flex-wrap: wrap; }
+.jingme-tag-list span { display: inline-flex; align-items: center; min-height: 18px; padding: 0 6px; border-radius: 9px; background: #f1f5fb; color: #6880a1; font-size: 8px; white-space: nowrap; }
+.jingme-table-empty { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 120px; color: #9ba5a0; font-size: 10px; }
+.jingme-editor-layout { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 15px; align-items: start; margin-top: 15px; }
+.jingme-editor-panel { min-width: 0; }
+.jingme-form-state { display: inline-flex; align-items: center; gap: 6px; color: #a06b1c; font-size: 9px; white-space: nowrap; }
+.jingme-form-state i { width: 6px; height: 6px; border-radius: 50%; background: #bf8a2c; }
+.jingme-form-state.ready { color: #327765; }
+.jingme-form-state.ready i { background: #58a182; }
+.jingme-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px 16px; padding: 21px; }
+.jingme-form-field { min-width: 0; }
+.jingme-form-field.full { grid-column: 1 / -1; }
+.jingme-field-label { display: flex; justify-content: space-between; align-items: baseline; gap: 9px; margin-bottom: 7px; }
+.jingme-field-label label { color: #4c5966; font-size: 10px; font-weight: 700; }
+.jingme-field-label span { color: #a1aaa5; font-size: 9px; }
+.jingme-form-field > input:not([type="checkbox"]), .jingme-form-field > select, .jingme-form-field > textarea { width: 100%; border: 1px solid #dce2df; border-radius: 4px; background: #fff; color: #4d5b68; font-size: 11px; }
+.jingme-form-field > input:not([type="checkbox"]), .jingme-form-field > select { height: 35px; padding: 0 10px; }
+.jingme-form-field > textarea { padding: 10px; resize: vertical; line-height: 1.55; }
+.jingme-form-field input:focus, .jingme-form-field select:focus, .jingme-form-field textarea:focus { outline: 2px solid rgb(24 59 122 / 20%); outline-offset: 1px; border-color: #8eaad0; }
+.jingme-form-field > small { display: block; margin-top: 6px; color: #9aa39f; font-size: 9px; line-height: 1.45; }
+.jingme-input-with-action { display: flex; align-items: center; gap: 7px; height: 35px; padding-left: 10px; border: 1px solid #dce2df; border-radius: 4px; color: #8a9990; }
+.jingme-input-with-action:focus-within { border-color: #8eaad0; outline: 2px solid rgb(24 59 122 / 20%); outline-offset: 1px; }
+.jingme-input-with-action input { min-width: 0; flex: 1; height: 32px; border: 0; outline: 0; color: #4d5b68; font-size: 11px; }
+.jingme-input-with-action button { align-self: stretch; padding: 0 10px; border: 0; border-left: 1px solid #e3e8e4; background: #fbfdfb; color: #2f69c9; font-size: 9px; cursor: pointer; }
+.jingme-error-text { display: inline-flex !important; align-items: center; gap: 5px; color: #ad5f4f !important; }
+.jingme-preview-panel { position: sticky; top: 18px; min-width: 0; border: 1px solid var(--line); background: #fff; box-shadow: 0 7px 20px rgb(33 48 66 / 2%); }
+.jingme-preview-heading { display: flex; align-items: center; justify-content: space-between; padding: 19px 18px 15px; border-bottom: 1px solid #edf0ed; }
+.jingme-preview-heading > div { display: flex; align-items: baseline; gap: 12px; }
+.jingme-preview-heading h3 { margin: 0; color: #23344b; font-size: 14px; font-weight: 720; }
+.jingme-phone-frame { margin: 17px 17px 19px; padding: 12px; border: 1px solid #dce4ec; border-radius: 11px; background: #f4f7fb; }
+.jingme-phone-top { display: flex; justify-content: space-between; margin-bottom: 14px; color: #8d99a6; font-size: 9px; }
+.jingme-message-row { display: flex; align-items: center; gap: 8px; margin: 0 2px 10px; }
+.jingme-avatar { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 8px; background: var(--navy); color: #fff; font-family: Georgia, serif; font-size: 13px; }
+.jingme-message-row strong { display: block; color: #405268; font-size: 10px; }
+.jingme-message-row small { display: block; margin-top: 3px; color: #9aa5af; font-size: 8px; }
+.jingme-message-card { padding: 15px 14px 13px; border: 1px solid #dbe3ea; border-top: 3px solid #b34b36; border-radius: 7px; background: #fff; box-shadow: 0 5px 14px rgb(45 63 83 / 6%); }
+.jingme-card-mark { color: #ad5a4a; font-size: 8px; letter-spacing: .05em; }
+.jingme-message-card h4 { margin: 9px 0 8px; color: #273c54; font-size: 14px; line-height: 1.35; }
+.jingme-message-card p { min-height: 64px; margin: 0; color: #667383; font-size: 10px; line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; }
+.jingme-message-card button { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 32px; margin-top: 13px; padding: 0 11px; border: 1px solid #d1ddec; border-radius: 4px; background: #f6f9ff; color: #2d64ad; font-size: 10px; font-weight: 650; }
+.jingme-message-card button:disabled { color: #abb3ba; }
+.jingme-preview-note { display: flex; align-items: center; gap: 5px; margin: 0; color: #9ba4a0; font-size: 8px; }
+.jingme-send-bar { position: sticky; bottom: 0; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: 15px; min-height: 62px; margin-top: 15px; padding: 0 18px; border: 1px solid #d8e0e8; background: rgb(255 255 255 / 96%); box-shadow: 0 -7px 18px rgb(33 48 66 / 5%); backdrop-filter: blur(8px); }
+.jingme-send-bar > span { display: inline-flex; align-items: center; gap: 6px; color: #8b9791; font-size: 10px; }
+.jingme-send-bar > span strong { color: #405977; }
+.jingme-send-bar > div { display: flex; align-items: center; gap: 8px; }
+.jingme-btn { min-height: 34px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 0 12px; border: 1px solid transparent; border-radius: 4px; font-size: 10px; font-weight: 650; cursor: pointer; transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease; }
+.jingme-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.jingme-btn.primary { border-color: var(--navy); background: var(--navy); color: #fff; box-shadow: 0 5px 14px rgb(24 59 122 / 13%); }
+.jingme-btn.primary:hover:not(:disabled) { background: #214b94; }
+.jingme-btn.secondary { border-color: #cfd6df; background: #fff; color: #3f4e62; }
+.jingme-btn.secondary:hover:not(:disabled) { border-color: #9eb2cd; color: var(--navy); }
+.jingme-btn.ghost { padding-inline: 6px; border-color: transparent; background: transparent; color: #78838d; }
+.jingme-btn.ghost:hover:not(:disabled) { color: var(--navy); }
+.jingme-btn.compact { min-height: 34px; padding-inline: 11px; }
+.jingme-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.jingme-records-view { min-width: 0; }
+.jingme-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 15px; }
+.jingme-metrics > div { min-height: 104px; padding: 16px 18px 13px; border: 1px solid var(--line); background: #fff; box-shadow: 0 6px 18px rgb(33 48 66 / 3%); }
+.jingme-metrics span { display: block; color: #818a84; font-size: 10px; }
+.jingme-metrics strong { display: block; margin-top: 12px; color: #2f527f; font-family: Georgia, serif; font-size: 27px; font-weight: 400; line-height: 1; }
+.jingme-metrics small { display: block; margin-top: 6px; color: #a0a8a2; font-size: 9px; }
+.jingme-metrics small.positive { color: var(--teal); }
+.jingme-record-toolbar { border-bottom: 1px solid #edf0ed; }
+.jingme-record-toolbar .jingme-search-field { flex: 1; width: auto; max-width: 420px; }
+.jingme-record-toolbar select { width: auto; min-width: 125px; }
+.jingme-record-table { min-width: 960px; }
+.jingme-record-table th, .jingme-record-table td { padding-left: 15px; padding-right: 15px; }
+.jingme-record-table td { height: 72px; color: #5d6872; font-size: 10px; }
+.jingme-record-table th:nth-child(1), .jingme-record-table td:nth-child(1) { width: 20%; }
+.jingme-record-table th:nth-child(2), .jingme-record-table td:nth-child(2) { width: 18%; }
+.jingme-record-table th:nth-child(3), .jingme-record-table td:nth-child(3) { width: 14%; }
+.jingme-record-table th:nth-child(4), .jingme-record-table td:nth-child(4) { width: 12%; }
+.jingme-record-table th:nth-child(5), .jingme-record-table td:nth-child(5) { width: 9%; }
+.jingme-record-table th:nth-child(6), .jingme-record-table td:nth-child(6) { width: 16%; }
+.jingme-record-table th:nth-child(7), .jingme-record-table td:nth-child(7) { width: 16%; }
+.jingme-status { min-height: 22px; padding: 0 8px; border-radius: 11px; white-space: nowrap; }
+.jingme-status i { width: 6px; height: 6px; border-radius: 50%; background: #58a182; }
+.jingme-status.success { background: #edf8f3; color: #2b806a; }
+.jingme-status.blue { background: #edf4ff; color: #2e68be; }
+.jingme-status.blue i { background: #4a83cf; }
+.jingme-status.warning { background: #fff7e8; color: #a06b1c; }
+.jingme-status.warning i { background: #bf8a2c; }
+.jingme-status.danger { background: #fff1ef; color: #ae5b4a; }
+.jingme-status.danger i { background: #c47060; }
+.success-text { color: #3d876f !important; }
+.failure-text { color: #ae5b4a !important; }
+.jingme-row-actions { display: flex; align-items: center; gap: 9px; }
+.jingme-row-actions button { display: inline-flex; align-items: center; gap: 4px; padding: 0; border: 0; background: transparent; color: #2f69c9; font-size: 9px; cursor: pointer; white-space: nowrap; }
+.jingme-row-actions button:hover { text-decoration: underline; }
+.jingme-toast { position: fixed; z-index: 60; right: 24px; bottom: 24px; display: inline-flex; align-items: center; gap: 8px; max-width: min(420px, calc(100vw - 32px)); padding: 12px 15px; border: 1px solid #b9dfd0; border-radius: 5px; background: #f4fbf7; box-shadow: 0 11px 28px rgb(31 71 58 / 14%); color: #236c59; font-size: 11px; }
+.jingme-modal-layer, .jingme-drawer-layer { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 20px; pointer-events: none; }
+.jingme-modal-backdrop, .jingme-drawer-backdrop { position: absolute; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: rgb(25 35 51 / 28%); cursor: default; pointer-events: auto; }
+.jingme-confirm-modal { position: relative; z-index: 1; width: min(640px, calc(100vw - 40px)); max-height: calc(100vh - 40px); overflow-y: auto; border: 1px solid #dce3eb; border-radius: 8px; background: #fff; box-shadow: 0 24px 60px rgb(25 35 51 / 24%); pointer-events: auto; }
+.jingme-confirm-modal > header, .jingme-drawer > header { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; padding: 21px 22px 14px; border-bottom: 1px solid #edf0ed; }
+.jingme-confirm-modal > header > div { display: flex; align-items: flex-start; gap: 11px; }
+.jingme-modal-icon { display: grid; place-items: center; width: 31px; height: 31px; border-radius: 5px; background: #edf4ff; color: #2f69c9; }
+.jingme-confirm-modal h2, .jingme-drawer h2 { margin: 1px 0 6px; color: #23344b; font-size: 17px; font-weight: 720; }
+.jingme-confirm-modal header p, .jingme-drawer header p { margin: 0; color: #929c98; font-size: 10px; line-height: 1.5; }
+.jingme-confirm-modal > header > button, .jingme-drawer > header > button { display: grid; place-items: center; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 4px; background: #f3f6f9; color: #68788a; cursor: pointer; }
+.jingme-confirm-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; padding: 5px 22px 10px; }
+.jingme-confirm-summary > div { min-height: 59px; padding: 13px 0 9px; border-bottom: 1px solid #edf0ed; }
+.jingme-confirm-summary span { display: block; color: #99a39e; font-size: 9px; }
+.jingme-confirm-summary strong { display: block; margin-top: 5px; overflow: hidden; color: #4b5e72; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.jingme-confirm-summary small { display: block; margin-top: 3px; color: #9da6aa; font-size: 9px; }
+.jingme-url-value { color: #2f69c9 !important; }
+.jingme-confirm-card { margin: 11px 22px 0; padding: 13px; border: 1px solid #dce4eb; border-top: 3px solid #b34b36; border-radius: 5px; background: #fbfcfe; }
+.jingme-confirm-card span { color: #435977; font-size: 10px; font-weight: 700; }
+.jingme-confirm-card p { margin: 7px 0 0; color: #657386; font-size: 10px; line-height: 1.6; }
+.jingme-confirm-check { display: flex; align-items: center; gap: 7px; margin: 17px 22px 0; color: #5f6e7b; font-size: 10px; cursor: pointer; }
+.jingme-confirm-modal > footer, .jingme-drawer > footer { display: flex; justify-content: flex-end; gap: 8px; padding: 19px 22px 21px; }
+.jingme-drawer-layer { display: block; padding: 0; }
+.jingme-drawer { position: absolute; top: 0; right: 0; bottom: 0; width: min(520px, 100vw); display: flex; flex-direction: column; background: #fff; box-shadow: -18px 0 45px rgb(25 35 51 / 17%); pointer-events: auto; animation: jingme-drawer-enter 190ms ease-out; }
+@keyframes jingme-drawer-enter { from { transform: translateX(28px); opacity: .2; } to { transform: translateX(0); opacity: 1; } }
+.jingme-drawer > header { padding: 24px 23px 18px; }
+.jingme-drawer-kicker { display: block; margin-bottom: 7px; color: #8e9994; font-size: 9px; letter-spacing: .08em; }
+.jingme-drawer h2 { font-size: 20px; }
+.jingme-drawer-content { flex: 1; overflow-y: auto; padding: 0 23px 18px; }
+.jingme-drawer-section { padding: 19px 0; border-bottom: 1px solid #edf0ed; }
+.jingme-drawer-section h3 { margin: 0 0 13px; color: #43546a; font-size: 11px; font-weight: 720; }
+.jingme-result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border: 1px solid #e3e8e4; background: #e3e8e4; }
+.jingme-result-grid > div { display: flex; flex-direction: column; gap: 5px; min-height: 68px; justify-content: center; padding: 0 11px; background: #fbfdfb; }
+.jingme-result-grid strong { color: #3f5877; font-family: Georgia, serif; font-size: 18px; font-weight: 400; }
+.jingme-result-grid span { color: #929b97; font-size: 9px; }
+.jingme-result-grid .success strong { color: #2b806a; }
+.jingme-result-grid .failure strong { color: #ae5b4a; }
+.jingme-result-progress { height: 5px; margin: 13px 0 11px; overflow: hidden; border-radius: 3px; background: #e8edf1; }
+.jingme-result-progress span { display: block; height: 100%; border-radius: inherit; background: #4d9a7c; }
+.jingme-condition-list { display: grid; gap: 0; border-top: 1px solid #edf0ed; }
+.jingme-condition-list > div { display: flex; align-items: center; justify-content: space-between; gap: 14px; min-height: 38px; border-bottom: 1px solid #edf0ed; }
+.jingme-condition-list span { color: #99a29d; font-size: 9px; }
+.jingme-condition-list strong { color: #53646f; font-size: 10px; font-weight: 600; text-align: right; }
+.jingme-snapshot-card { padding: 13px; border: 1px solid #dce4eb; border-top: 3px solid #b34b36; border-radius: 5px; background: #fbfcfe; }
+.jingme-snapshot-card > span { color: #ad5a4a; font-size: 8px; }
+.jingme-snapshot-card > strong { display: block; margin-top: 8px; color: #334b64; font-size: 12px; }
+.jingme-snapshot-card p { margin: 7px 0; color: #687686; font-size: 10px; line-height: 1.6; }
+.jingme-snapshot-card button { display: inline-flex; align-items: center; gap: 5px; padding: 0; border: 0; background: transparent; color: #2f69c9; font-size: 9px; }
+.jingme-snapshot-url { display: flex; align-items: center; gap: 5px; margin-top: 10px; overflow: hidden; color: #6580a5; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.jingme-failure-note { display: flex; align-items: flex-start; gap: 8px; margin-top: 17px; padding: 11px; border: 1px solid #ecd8d3; background: #fff9f8; color: #a65344; }
+.jingme-failure-note strong { display: block; font-size: 10px; }
+.jingme-failure-note p { margin: 5px 0 0; color: #a56b60; font-size: 9px; line-height: 1.5; }
+.jingme-drawer > footer { border-top: 1px solid #edf0ed; }
+@media (max-width: 1120px) {
+  .jingme-filter-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .jingme-filter-actions { grid-column: 1 / -1; justify-content: flex-start; }
+  .jingme-editor-layout { grid-template-columns: minmax(0, 1fr) 290px; }
+}
+@media (max-width: 820px) {
+  .jingme-page { padding-inline: 22px; }
+  .jingme-page-head { align-items: flex-start; flex-direction: column; gap: 14px; }
+  .jingme-head-actions { width: 100%; justify-content: space-between; }
+  .jingme-editor-layout { grid-template-columns: 1fr; }
+  .jingme-preview-panel { position: static; }
+  .jingme-send-bar { align-items: stretch; flex-direction: column; padding: 12px 15px; }
+  .jingme-send-bar > div { justify-content: flex-end; }
+  .jingme-record-toolbar { align-items: stretch; flex-wrap: wrap; }
+  .jingme-record-toolbar .jingme-search-field { flex-basis: 100%; max-width: none; }
+  .jingme-record-toolbar select { flex: 1; }
+}
+@media (max-width: 560px) {
+  .jingme-page { padding-inline: 15px; }
+  .jingme-filter-grid, .jingme-form-grid, .jingme-confirm-summary { grid-template-columns: 1fr; }
+  .jingme-form-field.full { grid-column: auto; }
+  .jingme-toolbar-hint { display: none; }
+  .jingme-audience-toolbar { flex-wrap: wrap; }
+  .jingme-search-field { width: 100%; }
+  .jingme-filter-actions { grid-column: auto; }
+  .jingme-metrics { grid-template-columns: 1fr; }
+  .jingme-send-bar > div { flex-wrap: wrap; }
+  .jingme-send-bar .jingme-btn.primary { flex: 1; }
+  .jingme-confirm-modal { width: calc(100vw - 24px); }
+}
+
+@media (min-width: 821px) {
+  .jingme-mode-tabs { min-height: 37px; }
+  .jingme-audience-toolbar { padding-top: 9px; padding-bottom: 8px; }
+  .jingme-result-bar { min-height: 34px; }
+  .jingme-user-table th { height: 30px; }
+  .jingme-user-table td { height: 48px; }
 }
